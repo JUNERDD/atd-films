@@ -1,0 +1,12 @@
+{
+  "note": "Marks missing from https://logos.lndev.me/. Original files, unchanged.",
+  "assets": [
+    {
+      "brand": "llama.cpp",
+      "file": "llamacpp.svg",
+      "source": "https://github.com/ggml-org/llama.cpp/blob/2cfef4d117d67ab1dec002915b48a15d11ee1973/media/llama1-icon-transparent.svg",
+      "sha256": "611af871c3ba331afa3350d4c94e546607ccdd952c6dfd928dc94dc1e0f0b3ba",
+      "rendering": "original-colors"
+    }
+  ]
+}

@@ -1,0 +1,57 @@
+{
+  "name": "atd-films",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Atd films, shared motion and product kits, and reproducible Remotion rendering.",
+  "license": "MIT",
+  "author": "JUNERDD",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/JUNERDD/atd-films.git"
+  },
+  "type": "module",
+  "scripts": {
+    "soundtrack": "node scripts/soundtrack.ts",
+    "studio": "pnpm assets:check && node scripts/soundtrack.ts all && remotion studio",
+    "render": "node scripts/render.ts",
+    "render:en": "node scripts/render.ts en",
+    "render:zh": "node scripts/render.ts zh",
+    "render:release": "node scripts/render.ts release-en release-zh",
+    "render:release:en": "node scripts/render.ts release-en",
+    "render:release:zh": "node scripts/render.ts release-zh",
+    "render:commands": "node scripts/render.ts commands-zh",
+    "preview:commands": "pnpm assets:check && node scripts/soundtrack.ts commands && node scripts/command-preview.ts",
+    "typecheck": "tsc -p tsconfig.json",
+    "lint": "oxlint src scripts *.ts",
+    "assets:check": "node scripts/verify-assets.ts",
+    "format": "oxfmt .",
+    "format:check": "oxfmt --check .",
+    "check": "pnpm assets:check && pnpm format:check && pnpm lint && pnpm typecheck",
+    "render:all": "node scripts/render.ts en zh release-en release-zh commands-zh",
+    "preview": "node scripts/preview.ts",
+    "check:secrets": "gitleaks git --staged --redact --verbose --no-banner --ignore-gitleaks-allow --config .gitleaks.toml"
+  },
+  "devDependencies": {
+    "@fontsource-variable/inter": "5.3.0",
+    "@fontsource-variable/noto-sans-sc": "5.3.0",
+    "@remotion/bundler": "4.0.534",
+    "@remotion/cli": "4.0.534",
+    "@remotion/media": "4.0.534",
+    "@remotion/renderer": "4.0.534",
+    "@shadcn/lint": "0.2.0",
+    "@types/node": "24.19.1",
+    "@types/react": "19.3.0",
+    "lucide-react": "1.54.0",
+    "oxfmt": "0.72.0",
+    "oxlint": "1.87.0",
+    "oxlint-tsgolint": "7.0.2003",
+    "react": "19.3.0",
+    "react-dom": "19.3.0",
+    "remotion": "4.0.534",
+    "typescript": "7.0.2"
+  },
+  "engines": {
+    "node": "^24.15.0 || >=26.0.0"
+  },
+  "packageManager": "pnpm@12.10.1"
+}

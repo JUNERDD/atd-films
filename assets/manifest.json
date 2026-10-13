@@ -1,0 +1,152 @@
+{
+  "schemaVersion": 1,
+  "productRepository": "https://github.com/JUNERDD/Atd",
+  "productCommit": "0740a767d3d7bc31b0e5a91d90e14567fd2d8723",
+  "snapshotDate": "2026-10-13",
+  "files": [
+    {
+      "path": "assets/brands/atd/symbol.svg",
+      "sha256": "54c7e94c01c2404db01f0cd019de990f14e1cb8338c26c0ed5dc0f1111205c85",
+      "source": "https://github.com/JUNERDD/Atd/blob/0740a767d3d7bc31b0e5a91d90e14567fd2d8723/packages/ui/src/assets/brands/atd/symbol.svg",
+      "transformation": "Unchanged SVG snapshot."
+    },
+    {
+      "path": "assets/brands/external/llamacpp.svg",
+      "sha256": "611af871c3ba331afa3350d4c94e546607ccdd952c6dfd928dc94dc1e0f0b3ba",
+      "source": "https://github.com/JUNERDD/Atd/blob/0740a767d3d7bc31b0e5a91d90e14567fd2d8723/packages/ui/src/assets/brands/external/llamacpp.svg",
+      "transformation": "Unchanged SVG snapshot."
+    },
+    {
+      "path": "assets/brands/lndev/anthropic.svg",
+      "sha256": "6816325a37a9b54cb088b804a201efcd40683ac595705186a181c7d61d970c07",
+      "source": "https://github.com/JUNERDD/Atd/blob/0740a767d3d7bc31b0e5a91d90e14567fd2d8723/packages/ui/src/assets/brands/lndev/anthropic.svg",
+      "transformation": "Unchanged SVG snapshot."
+    },
+    {
+      "path": "assets/brands/lndev/claude.svg",
+      "sha256": "dfe905feb65e7cfee91936bed766813dd2d0afc89aa113a414e9b5691d3e9cb0",
+      "source": "https://github.com/JUNERDD/Atd/blob/0740a767d3d7bc31b0e5a91d90e14567fd2d8723/packages/ui/src/assets/brands/lndev/claude.svg",
+      "transformation": "Unchanged SVG snapshot."
+    },
+    {
+      "path": "assets/brands/lndev/deepseek.svg",
+      "sha256": "93e21bfc69f51320943e0605344db01639e620b53a47aeb07e312f7ba92fe79f",
+      "source": "https://github.com/JUNERDD/Atd/blob/0740a767d3d7bc31b0e5a91d90e14567fd2d8723/packages/ui/src/assets/brands/lndev/deepseek.svg",
+      "transformation": "Unchanged SVG snapshot."
+    },
+    {
+      "path": "assets/brands/lndev/google-gemini-symbol.svg",
+      "sha256": "5ddd31925dd405deaec237b5fd47cbb4395c446a672563b16a528e032aa42878",
+      "source": "https://github.com/JUNERDD/Atd/blob/0740a767d3d7bc31b0e5a91d90e14567fd2d8723/packages/ui/src/assets/brands/lndev/google-gemini-symbol.svg",
+      "transformation": "Unchanged SVG snapshot."
+    },
+    {
+      "path": "assets/brands/lndev/kimi.svg",
+      "sha256": "0ba35ce31b57bb6db39d4e454925e39f88f46a3b52a07898bd8262c3902df7fc",
+      "source": "https://github.com/JUNERDD/Atd/blob/0740a767d3d7bc31b0e5a91d90e14567fd2d8723/packages/ui/src/assets/brands/lndev/kimi.svg",
+      "transformation": "Unchanged SVG snapshot."
+    },
+    {
+      "path": "assets/brands/lndev/lm-studio.svg",
+      "sha256": "55d0cc4a6c0fa4e6dab5b8072aacddc3a1df8ca8a78da3528256e564c12b8dd6",
+      "source": "https://github.com/JUNERDD/Atd/blob/0740a767d3d7bc31b0e5a91d90e14567fd2d8723/packages/ui/src/assets/brands/lndev/lm-studio.svg",
+      "transformation": "Unchanged SVG snapshot."
+    },
+    {
+      "path": "assets/brands/lndev/mistral-ai.svg",
+      "sha256": "276b9fc3972db664c4a7f8c944f9d0548b423a6b89e80e392f1ab497edf4b81d",
+      "source": "https://github.com/JUNERDD/Atd/blob/0740a767d3d7bc31b0e5a91d90e14567fd2d8723/packages/ui/src/assets/brands/lndev/mistral-ai.svg",
+      "transformation": "Unchanged SVG snapshot."
+    },
+    {
+      "path": "assets/brands/lndev/ollama.svg",
+      "sha256": "b5ee1874b69d216fbc420c6118fac9b2fcc9eeb6ab6a7fc374c6a6512e48b993",
+      "source": "https://github.com/JUNERDD/Atd/blob/0740a767d3d7bc31b0e5a91d90e14567fd2d8723/packages/ui/src/assets/brands/lndev/ollama.svg",
+      "transformation": "Unchanged SVG snapshot."
+    },
+    {
+      "path": "assets/brands/lndev/openrouter.svg",
+      "sha256": "fec63b6dc071651e45a784031c4755250384314289e3a2695a3383635f6de1d3",
+      "source": "https://github.com/JUNERDD/Atd/blob/0740a767d3d7bc31b0e5a91d90e14567fd2d8723/packages/ui/src/assets/brands/lndev/openrouter.svg",
+      "transformation": "Unchanged SVG snapshot."
+    },
+    {
+      "path": "assets/brands/lndev/qwen.svg",
+      "sha256": "0e9788033f252b54c026f4022acf0cc0da5c8f93062d4047e1562d696426194c",
+      "source": "https://github.com/JUNERDD/Atd/blob/0740a767d3d7bc31b0e5a91d90e14567fd2d8723/packages/ui/src/assets/brands/lndev/qwen.svg",
+      "transformation": "Unchanged SVG snapshot."
+    },
+    {
+      "path": "assets/brands/lndev/vllm.svg",
+      "sha256": "12a0812e247cef4b31160e0d0267142ffe491491537f3e275d8bc645b61eb1a8",
+      "source": "https://github.com/JUNERDD/Atd/blob/0740a767d3d7bc31b0e5a91d90e14567fd2d8723/packages/ui/src/assets/brands/lndev/vllm.svg",
+      "transformation": "Unchanged SVG snapshot."
+    },
+    {
+      "path": "assets/brands/lndev/x-ai.svg",
+      "sha256": "1dab2028296a547c1692df3a500766cf1aad4b3d360a11f9c461f9ee7630c787",
+      "source": "https://github.com/JUNERDD/Atd/blob/0740a767d3d7bc31b0e5a91d90e14567fd2d8723/packages/ui/src/assets/brands/lndev/x-ai.svg",
+      "transformation": "Unchanged SVG snapshot."
+    },
+    {
+      "path": "assets/brands/openai.svg",
+      "sha256": "647dcb067d5d7e3a49485c9c7edb161dec5f0dc0f01d0a13c182af9532392374",
+      "source": "https://github.com/JUNERDD/Atd/blob/0740a767d3d7bc31b0e5a91d90e14567fd2d8723/packages/ui/src/assets/brands/openai.svg",
+      "transformation": "Unchanged SVG snapshot."
+    },
+    {
+      "path": "assets/brands/lndev/google-gemini.svg",
+      "sha256": "26e40aa4773d7bdb4306cbce583180ee1649b936abde2b4d7bc90e1baa5ec4cb",
+      "source": "https://github.com/ln-dev7/logos-apps/blob/1762cfa050cdba49ba85c813a434d2526cdf0839/logos/google-gemini.svg",
+      "transformation": "Original wordmark preserved alongside its documented symbol extraction."
+    },
+    {
+      "path": "assets/brands/lndev/sources.json",
+      "sha256": "eb12e970036d62a77ddec4210fc5f2c5b3c45c8e9406ea739a84f90bf0311169",
+      "source": "https://github.com/JUNERDD/Atd/blob/0740a767d3d7bc31b0e5a91d90e14567fd2d8723/packages/ui/src/assets/brands/lndev/sources.json",
+      "transformation": "Entries filtered to the marks used by these films."
+    },
+    {
+      "path": "assets/brands/external/sources.json",
+      "sha256": "a7c44f36501e18052ab9b7430d8c98c0a01c66e4aa42f7845bbd949b925517ab",
+      "source": "https://github.com/JUNERDD/Atd/blob/0740a767d3d7bc31b0e5a91d90e14567fd2d8723/packages/ui/src/assets/brands/external/sources.json",
+      "transformation": "Entries filtered to the marks used by these films."
+    },
+    {
+      "path": "public/command-film/codex.png",
+      "sha256": "51ccb56e6dcd8c5fb048c087267206773b24794154d2592440c3909cda0cd2f9",
+      "source": "OpenAI ChatGPT.app / icon-codex-light.png",
+      "transformation": "Existing film snapshot: sips PNG conversion, maximum dimension 256 pixels."
+    },
+    {
+      "path": "public/command-film/finder.png",
+      "sha256": "4f6c4190d4a9644a879805b91c4cbfeb3486bb13174eb341658c8f7a0f51ad59",
+      "source": "Apple macOS Finder.app / Finder.icns",
+      "transformation": "Existing film snapshot: sips PNG conversion, maximum dimension 256 pixels."
+    },
+    {
+      "path": "public/command-film/mail.png",
+      "sha256": "3a23e17ab5305f08289dc8c303a637dd096a947495b6a875354d41c4130ff739",
+      "source": "Apple macOS Mail.app / ApplicationIcon.icns",
+      "transformation": "Existing film snapshot: sips PNG conversion, maximum dimension 256 pixels."
+    },
+    {
+      "path": "public/command-film/notes.png",
+      "sha256": "9847a0a6abc1db2b7b110d2f6666fabad44f8c0b3ef2e7e871067678b8468ef4",
+      "source": "Apple macOS Notes.app / AppIcon.icns",
+      "transformation": "Existing film snapshot: sips PNG conversion, maximum dimension 256 pixels."
+    },
+    {
+      "path": "public/command-film/safari.png",
+      "sha256": "214dd888fc3feef1eef08b7d591c2ce61b8211021cd0a77338c80eb4487e64f4",
+      "source": "Apple Safari.app / AppIcon.icns",
+      "transformation": "Existing film snapshot: sips PNG conversion, maximum dimension 256 pixels."
+    },
+    {
+      "path": "public/command-film/wallpaper.jpg",
+      "sha256": "15f4bc7706ff917995f7c380a56db09e9b1c8cf081b30db8409cd0ea72450cb4",
+      "source": "https://github.com/JUNERDD/Atd/blob/0740a767d3d7bc31b0e5a91d90e14567fd2d8723/apps/website/public/cases/layers/desktop.webp",
+      "transformation": "Existing film snapshot: ffmpeg crop=iw:ih-250:0:60, one JPEG frame at q:v=2; removes the menu bar and Dock."
+    }
+  ]
+}

@@ -1,0 +1,42 @@
+title = "Atd films secrets and private references"
+
+[extend]
+useDefault = true
+
+[[rules]]
+id = "private-figma-file"
+description = "Keep design file URLs in ignored local project context"
+regex = '''https?://(?:www\.)?figma\.com/(?:design|file|proto|board)/([A-Za-z0-9]{15,})(?:[/?#\s)"'`]|$)'''
+secretGroup = 1
+keywords = ["figma.com"]
+
+[[rules]]
+id = "temporary-figma-asset"
+description = "Save required exported assets locally instead of publishing temporary MCP URLs"
+regex = '''https?://(?:www\.)?figma\.com/api/mcp/asset/[A-Za-z0-9._/-]+'''
+keywords = ["figma.com/api/mcp/asset"]
+
+[[rules]]
+id = "private-cloudflare-account"
+description = "Account identifiers belong in local deployment configuration"
+regex = '''(?i)(?:account_id["']?\s*[:=]\s*["']?|dash\.cloudflare\.com/)([a-f0-9]{32})'''
+secretGroup = 1
+keywords = ["account_id", "dash.cloudflare.com"]
+
+[[rules]]
+id = "personal-home-path"
+description = "Use repository-relative paths or a neutral fixture user"
+regex = '''/(?:Users|home)/([A-Za-z0-9_.-]+)'''
+secretGroup = 1
+keywords = ["/Users/", "/home/"]
+[[rules.allowlists]]
+description = "Neutral example users, not personal account names"
+regexTarget = "secret"
+regexes = ['''^(me|user|dev|a|u|x|test|USERNAME|username|runner)$''']
+
+[[rules]]
+id = "private-local-config"
+description = "Local project context, deployment config and secret files must stay untracked"
+path = '''(^|/)(\.local/|\.dev\.vars(?:\.|$)|wrangler\.local\.jsonc$|\.env(?:$|\.))'''
+[[rules.allowlists]]
+paths = ['''(^|/)(\.env|\.dev\.vars)\.example$''']

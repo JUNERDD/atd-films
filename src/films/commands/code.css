@@ -1,0 +1,312 @@
+.cf-agent-window .mac-window[data-material] {
+  --radius-window: 15px;
+  background: #faf9f7;
+  color: #272725;
+}
+.cf-agent-window .mac-window__sidebar {
+  background: #eeece9;
+  box-shadow: none;
+}
+.cf-agent-window .mac-window__title {
+  font-size: 13px;
+  font-weight: 550;
+  padding-left: 10px;
+}
+.cf-agent-window .mac-window__bar {
+  padding-right: 24px;
+}
+.cf-agent-window-tools {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 11px;
+  color: #797976;
+}
+.cf-agent-window-tools svg {
+  width: 15px;
+  height: 15px;
+}
+.cf-agent-window-tools svg:last-child {
+  margin-left: 15px;
+}
+.cf-agent-sidebar {
+  padding: 5px 10px;
+  font-size: 12px;
+}
+.cf-agent-sidebar > div,
+.cf-agent-sidebar footer {
+  height: 33px;
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  padding: 0 10px;
+  border-radius: 7px;
+}
+.cf-agent-sidebar svg {
+  width: 15px;
+  height: 15px;
+  color: #6f706d;
+}
+.cf-agent-sidebar > small {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 25px 10px 6px;
+  color: #93938e;
+  font-size: 10px;
+}
+.cf-agent-sidebar .cf-agent-project {
+  gap: 5px;
+}
+.cf-agent-sidebar .cf-agent-project svg:first-child {
+  width: 11px;
+}
+.cf-agent-sidebar [data-current] {
+  background: #dfddda;
+  margin-left: 13px;
+  font-weight: 550;
+}
+.cf-agent-sidebar .cf-agent-recent {
+  margin-left: 13px;
+  color: #868680;
+}
+.cf-agent-sidebar footer {
+  position: absolute;
+  bottom: 10px;
+}
+.cf-agent-layout {
+  display: flex;
+  height: 100%;
+}
+.cf-agent-thread {
+  position: relative;
+  flex: 0 0 648px;
+  min-width: 0;
+}
+.cf-agent-transcript {
+  padding: 20px 28px;
+  font-size: 14px;
+  line-height: 1.7;
+}
+.cf-agent-user {
+  margin-left: 30px;
+  padding: 12px 16px;
+  background: #eeedea;
+  border-radius: 16px 16px 5px 16px;
+  font-size: 13px;
+  line-height: 1.9;
+}
+.cf-agent-reply {
+  margin: 22px 0 18px;
+}
+.cf-agent-file {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  padding: 11px 13px;
+  border: 1px solid #e1dfda;
+  border-radius: 9px;
+  font-size: 12px;
+}
+.cf-agent-file svg {
+  width: 15px;
+  height: 15px;
+  color: #777;
+}
+.cf-agent-file span {
+  margin-left: auto;
+  font-size: 11px;
+  color: #6f8574;
+}
+.cf-agent-activity {
+  font-size: 12px;
+  color: #7b7b75;
+}
+.cf-agent-activity > div {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  height: 31px;
+}
+.cf-agent-activity svg {
+  width: 14px;
+  height: 14px;
+}
+.cf-agent-activity em {
+  font-style: normal;
+  font-size: 11px;
+  color: #457859;
+}
+.cf-agent-activity svg:last-child:not(:first-child) {
+  color: #457859;
+}
+.cf-agent-result p {
+  margin: 16px 0 12px;
+}
+.cf-agent-result strong {
+  font-weight: 550;
+}
+.cf-agent-result > span {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  padding: 6px 11px;
+  border: 1px solid #dfded8;
+  border-radius: 7px;
+  font-size: 11px;
+}
+.cf-agent-result svg {
+  width: 13px;
+  height: 13px;
+}
+.cf-agent-result b {
+  color: #487358;
+  font-weight: 500;
+}
+.cf-agent-result em {
+  color: #b3776b;
+  font-style: normal;
+}
+.cf-agent-composer {
+  position: absolute;
+  left: 28px;
+  right: 28px;
+  bottom: 26px;
+  height: 204px;
+  border: 1px solid #dbd9d4;
+  border-radius: 19px;
+  background: #fffefc;
+  box-shadow: 0 3px 12px rgb(38 31 15 / 0.025);
+  padding: 17px;
+}
+.cf-agent-input {
+  font-size: 16px;
+  line-height: 27px;
+  font-weight: 400;
+}
+.cf-agent-input > div > span {
+  padding: 3px 0;
+  background-image: linear-gradient(#b9d6ff, #b9d6ff);
+  background-size: calc(var(--selection) * 100%) 100%;
+  background-repeat: no-repeat;
+}
+.cf-agent-composer[data-submitted] {
+  height: 90px;
+}
+.cf-agent-placeholder {
+  color: #999991;
+  font-size: 14px;
+}
+.cf-agent-composer-tools {
+  position: absolute;
+  bottom: 14px;
+  left: 17px;
+  right: 14px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  font-size: 11px;
+  color: #7b7c76;
+}
+.cf-agent-composer-tools svg {
+  width: 17px;
+  height: 17px;
+}
+.cf-agent-composer-tools > span {
+  display: flex;
+  align-items: center;
+  gap: 3px;
+}
+.cf-agent-composer-tools > span svg {
+  width: 11px;
+  height: 11px;
+}
+.cf-agent-composer-tools > svg:last-of-type {
+  margin-left: auto;
+}
+.cf-agent-send {
+  display: grid;
+  place-items: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: #282926;
+  color: #fff;
+}
+.cf-agent-send[data-hover] {
+  background: #41423e;
+}
+.cf-agent-send[data-pressed] {
+  transform: scale(0.92);
+  background: #151613;
+}
+.cf-agent-context {
+  position: absolute;
+  left: 39px;
+  bottom: 6px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 9px;
+  color: #92938c;
+}
+.cf-agent-context svg {
+  width: 10px;
+  height: 10px;
+}
+.cf-agent-context svg:nth-of-type(3) {
+  margin-left: 9px;
+}
+.cf-agent-working {
+  position: absolute;
+  left: 30px;
+  bottom: 133px;
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 11px;
+  color: #8d8d86;
+}
+.cf-agent-working span {
+  height: 4px;
+  width: 4px;
+  border-radius: 50%;
+  background: #8d8d86;
+}
+.cf-agent-browser {
+  flex: 1;
+  min-width: 0;
+  border-left: 1px solid #e1dfdb;
+  background: #fffefc;
+}
+.cf-agent-browser-bar {
+  height: 36px;
+  display: flex;
+  align-items: center;
+  gap: 13px;
+  padding: 0 16px;
+  border-bottom: 1px solid #e9e7e2;
+  color: #7c7c75;
+  font-size: 10px;
+}
+.cf-agent-browser-bar svg {
+  width: 13px;
+  height: 13px;
+}
+.cf-agent-browser-bar > span {
+  flex: 1;
+  text-align: center;
+}
+.cf-agent-browser .cf-shop {
+  padding: 20px 36px;
+}
+.cf-agent-browser .cf-shop header {
+  margin-bottom: 20px;
+}
+.cf-agent-browser .cf-shop h2 {
+  margin-bottom: 14px;
+}
+.cf-agent-browser .cf-product {
+  padding: 13px 0;
+}

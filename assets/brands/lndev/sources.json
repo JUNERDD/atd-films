@@ -1,0 +1,99 @@
+{
+  "catalog": "https://logos.lndev.me/",
+  "repository": "https://github.com/ln-dev7/logos-apps",
+  "revision": "1762cfa050cdba49ba85c813a434d2526cdf0839",
+  "assets": [
+    {
+      "brand": "Anthropic",
+      "file": "anthropic.svg",
+      "source": "https://github.com/ln-dev7/logos-apps/blob/1762cfa050cdba49ba85c813a434d2526cdf0839/logos/anthropic.svg",
+      "sha256": "6816325a37a9b54cb088b804a201efcd40683ac595705186a181c7d61d970c07",
+      "rendering": "foreground"
+    },
+    {
+      "brand": "LM Studio",
+      "file": "lm-studio.svg",
+      "source": "https://github.com/ln-dev7/logos-apps/blob/1762cfa050cdba49ba85c813a434d2526cdf0839/logos/lm-studio.svg",
+      "sha256": "55d0cc4a6c0fa4e6dab5b8072aacddc3a1df8ca8a78da3528256e564c12b8dd6",
+      "rendering": "foreground"
+    },
+    {
+      "brand": "Google Gemini",
+      "file": "google-gemini.svg",
+      "source": "https://github.com/ln-dev7/logos-apps/blob/1762cfa050cdba49ba85c813a434d2526cdf0839/logos/google-gemini.svg",
+      "sha256": "26e40aa4773d7bdb4306cbce583180ee1649b936abde2b4d7bc90e1baa5ec4cb",
+      "rendering": "original-colors",
+      "symbolFile": "google-gemini-symbol.svg",
+      "derivation": "Unchanged final star path from google-gemini.svg, with its own viewBox. No path data or fill altered."
+    },
+    {
+      "brand": "DeepSeek",
+      "file": "deepseek.svg",
+      "source": "https://github.com/ln-dev7/logos-apps/blob/1762cfa050cdba49ba85c813a434d2526cdf0839/logos/deepseek.svg",
+      "sha256": "93e21bfc69f51320943e0605344db01639e620b53a47aeb07e312f7ba92fe79f",
+      "rendering": "original-colors"
+    },
+    {
+      "brand": "Claude",
+      "file": "claude.svg",
+      "source": "https://github.com/ln-dev7/logos-apps/blob/1762cfa050cdba49ba85c813a434d2526cdf0839/logos/claude.svg",
+      "sha256": "dfe905feb65e7cfee91936bed766813dd2d0afc89aa113a414e9b5691d3e9cb0",
+      "rendering": "original-colors"
+    },
+    {
+      "brand": "openrouter",
+      "file": "openrouter.svg",
+      "source": "https://raw.githubusercontent.com/ln-dev7/logos-apps/1762cfa050cdba49ba85c813a434d2526cdf0839/logos/openrouter.svg",
+      "sha256": "fec63b6dc071651e45a784031c4755250384314289e3a2695a3383635f6de1d3",
+      "rendering": "foreground"
+    },
+    {
+      "brand": "mistral-ai",
+      "file": "mistral-ai.svg",
+      "source": "https://raw.githubusercontent.com/ln-dev7/logos-apps/1762cfa050cdba49ba85c813a434d2526cdf0839/logos/mistral-ai.svg",
+      "sha256": "276b9fc3972db664c4a7f8c944f9d0548b423a6b89e80e392f1ab497edf4b81d",
+      "rendering": "original"
+    },
+    {
+      "brand": "kimi",
+      "file": "kimi.svg",
+      "source": "https://raw.githubusercontent.com/ln-dev7/logos-apps/1762cfa050cdba49ba85c813a434d2526cdf0839/logos/kimi.svg",
+      "sha256": "0ba35ce31b57bb6db39d4e454925e39f88f46a3b52a07898bd8262c3902df7fc",
+      "rendering": "original"
+    },
+    {
+      "brand": "ollama",
+      "file": "ollama.svg",
+      "source": "https://raw.githubusercontent.com/ln-dev7/logos-apps/1762cfa050cdba49ba85c813a434d2526cdf0839/logos/ollama.svg",
+      "sha256": "b5ee1874b69d216fbc420c6118fac9b2fcc9eeb6ab6a7fc374c6a6512e48b993",
+      "rendering": "foreground"
+    },
+    {
+      "brand": "qwen",
+      "file": "qwen.svg",
+      "source": "https://raw.githubusercontent.com/ln-dev7/logos-apps/1762cfa050cdba49ba85c813a434d2526cdf0839/logos/qwen.svg",
+      "sha256": "0e9788033f252b54c026f4022acf0cc0da5c8f93062d4047e1562d696426194c",
+      "rendering": "original"
+    },
+    {
+      "brand": "x-ai",
+      "file": "x-ai.svg",
+      "source": "https://raw.githubusercontent.com/ln-dev7/logos-apps/1762cfa050cdba49ba85c813a434d2526cdf0839/logos/x-ai.svg",
+      "sha256": "1dab2028296a547c1692df3a500766cf1aad4b3d360a11f9c461f9ee7630c787",
+      "rendering": "foreground"
+    },
+    {
+      "brand": "vLLM",
+      "file": "vllm.svg",
+      "source": "https://raw.githubusercontent.com/ln-dev7/logos-apps/1762cfa050cdba49ba85c813a434d2526cdf0839/logos/vllm.svg",
+      "sha256": "12a0812e247cef4b31160e0d0267142ffe491491537f3e275d8bc645b61eb1a8",
+      "rendering": "original-colors"
+    }
+  ],
+  "existingOpenAI": {
+    "file": "../openai.svg",
+    "source": "https://github.com/ln-dev7/logos-apps/blob/1762cfa050cdba49ba85c813a434d2526cdf0839/logos/openai.svg",
+    "note": "Existing file retained; identical source SVG ignoring its trailing newline."
+  },
+  "rights": "Brand marks belong to their respective owners. The catalog code license does not license the marks; see the upstream repository README."
+}

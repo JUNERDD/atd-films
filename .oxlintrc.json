@@ -1,0 +1,117 @@
+{
+  "$schema": "./node_modules/oxlint/configuration_schema.json",
+  "plugins": ["typescript", "react", "jsx-a11y", "unicorn", "oxc"],
+  "jsPlugins": ["@shadcn/lint"],
+  "categories": {
+    "correctness": "error"
+  },
+  "rules": {
+    "react/only-export-components": [
+      "error",
+      {
+        "allowConstantExport": true
+      }
+    ],
+    "shadcn/no-raw-colors": "error",
+    "shadcn/no-arbitrary-values": [
+      "error",
+      {
+        "allow": ["layout"]
+      }
+    ],
+    "shadcn/no-inline-styles": "error",
+    "shadcn/require-static-classes": "error",
+    "shadcn/no-unknown-classes": "off",
+    "react/rules-of-hooks": "error",
+    "typescript/switch-exhaustiveness-check": "error",
+    "typescript/no-misused-promises": "error",
+    "typescript/only-throw-error": "error"
+  },
+  "env": {
+    "browser": true,
+    "node": true
+  },
+  "overrides": [
+    {
+      "files": ["**/*.ts", "**/*.tsx"],
+      "rules": {
+        "max-lines": [
+          "error",
+          {
+            "max": 350,
+            "skipBlankLines": false,
+            "skipComments": false
+          }
+        ]
+      }
+    },
+    {
+      "files": ["src/shared/**"],
+      "rules": {
+        "no-restricted-imports": [
+          "error",
+          {
+            "patterns": [
+              {
+                "group": ["**/films/**", "@atd/*"],
+                "message": "Films own their content; shared code must not depend on films or the product workspace."
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "files": ["src/films/launch/**"],
+      "rules": {
+        "no-restricted-imports": [
+          "error",
+          {
+            "patterns": [
+              {
+                "group": ["**/release-0.8/**", "**/commands/**"],
+                "message": "Films own their content; shared code must not depend on films or the product workspace."
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "files": ["src/films/release-0.8/**"],
+      "rules": {
+        "no-restricted-imports": [
+          "error",
+          {
+            "patterns": [
+              {
+                "group": ["**/launch/**", "**/commands/**"],
+                "message": "Films own their content; shared code must not depend on films or the product workspace."
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "files": ["src/films/commands/**"],
+      "rules": {
+        "no-restricted-imports": [
+          "error",
+          {
+            "patterns": [
+              {
+                "group": ["**/launch/**", "**/release-0.8/**"],
+                "message": "Films own their content; shared code must not depend on films or the product workspace."
+              }
+            ]
+          }
+        ]
+      }
+    }
+  ],
+  "ignorePatterns": ["out/**", "public/audio/**", ".artifacts/**", "tmp/**", "node_modules/**"],
+  "options": {
+    "typeAware": true
+  }
+}
