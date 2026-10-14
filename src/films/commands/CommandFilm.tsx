@@ -1,45 +1,26 @@
 import { Audio } from '@remotion/media';
-import { AbsoluteFill, Sequence, staticFile, useCurrentFrame } from 'remotion';
+import { AbsoluteFill, staticFile, useCurrentFrame } from 'remotion';
 import { useFilmFonts } from './fonts.ts';
-import { BrandScene } from './BrandScenes.tsx';
-import { SetupScene } from './SetupScene.tsx';
-import { CodeScene } from './CodeScene.tsx';
-import { MailScene } from './MailScene.tsx';
-import { NotesScene } from './NotesScene.tsx';
-import { DesktopBackdrop } from './MacDesktop.tsx';
-import { CHAPTERS, COMMAND_FPS, chapterLead, chapterTail, frames } from './timeline.ts';
+import { KineticTitles } from './KineticTitles.tsx';
+import { MailObject } from './MailObject.tsx';
+import { PromptObject } from './PromptObject.tsx';
+import { NotesObject } from './NotesObject.tsx';
+import { ClosingBrand } from './ClosingBrand.tsx';
+import { COMMAND_FPS } from './timeline.ts';
+import './kinetic-film.css';
+import './kinetic-objects.css';
 
-const SCENES = {
-  open: BrandScene,
-  setup: SetupScene,
-  code: CodeScene,
-  mail: MailScene,
-  notes: NotesScene,
-  close: BrandScene,
-};
-
-/** Offline, source-grounded UI animation. No app automation, screen capture, or network model calls. */
+/** A single editorial stage; objects retain their identity across the narrative landmarks. */
 export function CommandFilm() {
   useFilmFonts();
   const t = useCurrentFrame() / COMMAND_FPS;
   return (
-    <AbsoluteFill className="film command-film">
-      <DesktopBackdrop t={t} />
-      {CHAPTERS.map((chapter) => {
-        const Scene = SCENES[chapter.id];
-        return (
-          <Sequence
-            key={chapter.id}
-            from={frames(chapter.start - chapterLead(chapter.id))}
-            durationInFrames={frames(
-              chapter.end - chapter.start + chapterLead(chapter.id) + chapterTail(chapter.id),
-            )}
-            name={chapter.id}
-          >
-            <Scene closing={chapter.id === 'close'} />
-          </Sequence>
-        );
-      })}
+    <AbsoluteFill className="film command-film-v2">
+      <NotesObject t={t} />
+      <MailObject t={t} />
+      <PromptObject t={t} />
+      <KineticTitles t={t} />
+      <ClosingBrand t={t} />
       <Audio src={staticFile('audio/command-film.wav')} />
     </AbsoluteFill>
   );

@@ -1,228 +1,228 @@
-/** Original 120 BPM arrangement; chapter phrasing follows the picture, not UI operations. */
+/** Original 150 BPM score: compact pulse phrases, broken beats and a resolved A-major close. */
 import { createCues, type EffectBuses } from '../../shared/audio/cue-bus.ts';
 import { addMono, prng, stereo } from '../../shared/audio/dsp.ts';
-import { glass, swoosh } from '../../shared/audio/effects.ts';
-import { bassNote, hat, kick, padNote, pluck, rim } from '../../shared/audio/instruments.ts';
+import { swoosh } from '../../shared/audio/effects.ts';
+import { clap, hat, kick } from '../../shared/audio/instruments.ts';
 import type { MusicBuses } from '../../shared/audio/master.ts';
-import { COMMAND_DURATION, CUTS, HANDOFF } from './timeline.ts';
+import { chordTone, pulseLead, rubberBass } from './audio-instruments.ts';
+import { BEAT, COMMAND_DURATION, CUTS, MOTION, NOTES, PROMPT, TRANSLATE } from './timeline.ts';
 
-type Harmony = {
-  at: number;
-  length: number;
-  bass: number;
-  voices: readonly number[];
-};
-type Melody = readonly (readonly [at: number, note: number, weight: number])[];
+type Harmony = { at: number; root: number; voices: readonly number[] };
+type Melody = readonly (readonly [beat: number, note: number, weight: number])[];
 
-// Open voicings retain common tones while the bass moves: D6/9, Bm7, Gmaj9,
-// Em9 and A suspensions. The close finally releases the suspension into D6/9.
-const MAIL_HARMONY: readonly Harmony[] = [
-  { at: 0, length: 2, bass: 38, voices: [57, 62, 66, 76] },
-  { at: 2, length: 2, bass: 35, voices: [57, 62, 66, 73] },
-  { at: 4, length: 2, bass: 43, voices: [57, 62, 66, 71] },
-  { at: 6, length: 2, bass: 40, voices: [55, 62, 66, 71] },
-  { at: 8, length: 3, bass: 45, voices: [57, 62, 64, 71] },
+const F_SHARP = [61, 66, 69, 76];
+const D_MAJOR = [61, 64, 69, 74];
+const A_MAJOR = [61, 64, 69, 71];
+const E_SUSPENDED = [59, 64, 69, 73];
+const HARMONY: readonly [Harmony, ...Harmony[]] = [
+  { at: 0, root: 42, voices: F_SHARP },
+  { at: CUTS.translate.start + 4 * BEAT, root: 38, voices: D_MAJOR },
+  { at: CUTS.translate.start + 8 * BEAT, root: 45, voices: A_MAJOR },
+  { at: CUTS.reuse.start, root: 40, voices: E_SUSPENDED },
+  { at: CUTS.prompt.start, root: 42, voices: F_SHARP },
+  { at: CUTS.prompt.start + 4 * BEAT, root: 38, voices: D_MAJOR },
+  { at: CUTS.prompt.start + 8 * BEAT, root: 45, voices: A_MAJOR },
+  { at: CUTS.notes.start, root: 42, voices: F_SHARP },
+  { at: CUTS.notes.start + 4 * BEAT, root: 38, voices: D_MAJOR },
+  { at: CUTS.notes.start + 8 * BEAT, root: 40, voices: [59, 61, 68, 76] },
+  { at: CUTS.notes.start + 12 * BEAT, root: 40, voices: E_SUSPENDED },
+  { at: CUTS.close.start + 3 * BEAT, root: 45, voices: A_MAJOR },
 ];
-const CODE_HARMONY: readonly Harmony[] = [
-  { at: 0, length: 2, bass: 35, voices: [57, 62, 66, 73] },
-  { at: 2, length: 2, bass: 43, voices: [59, 62, 66, 74] },
-  { at: 4, length: 3, bass: 38, voices: [57, 64, 66, 74] },
-  { at: 7, length: 2, bass: 45, voices: [57, 61, 64, 71] },
-];
-const NOTES_HARMONY: readonly Harmony[] = [
-  { at: 0, length: 2, bass: 43, voices: [57, 62, 66, 71] },
-  { at: 2, length: 2, bass: 42, voices: [57, 62, 66, 76] },
-  { at: 4, length: 2, bass: 40, voices: [55, 62, 66, 71] },
-  { at: 6, length: 2, bass: 43, voices: [57, 62, 66, 74] },
-  { at: 8, length: 3, bass: 45, voices: [57, 61, 64, 71] },
-];
+
+// Drop attacks before each paste, then let the phrase's tail carry the reading hold.
+// The output itself has no cue; the arrangement resumes on its own musical grid.
+const READING_SPACES = [
+  [CUTS.translate.start + TRANSLATE.written - 0.2, CUTS.translate.start + TRANSLATE.written + 0.8],
+  [CUTS.prompt.start + PROMPT.written - 0.2, CUTS.prompt.start + PROMPT.written + 1],
+  [CUTS.notes.start + NOTES.written - 0.25, CUTS.notes.start + NOTES.written + 0.95],
+] as const;
+const isReading = (at: number) => READING_SPACES.some(([from, to]) => at >= from && at < to);
+
+function harmonyAt(at: number): Harmony {
+  let current = HARMONY[0];
+  for (const chord of HARMONY) {
+    if (chord.at > at + 0.0001) break;
+    current = chord;
+  }
+  return current;
+}
 
 export function commandScore(): MusicBuses {
-  const random = prng(1013);
+  const random = prng(1501024);
   const buses: MusicBuses = {
     dry: stereo(COMMAND_DURATION),
     ducked: stereo(COMMAND_DURATION),
     send: stereo(COMMAND_DURATION),
     kicks: [],
   };
-  const sustain = (at: number, length: number, notes: readonly number[], gain: number) => {
-    notes.forEach((note, i) => {
-      const pan = (i / Math.max(1, notes.length - 1) - 0.5) * 0.9;
-      const voice = padNote(
-        note,
-        length,
-        random,
-        (t) => 820 + 260 * Math.sin((t / length) * Math.PI),
-      );
+  const drum = (at: number, gain: number) => {
+    if (isReading(at)) return;
+    addMono(buses.dry, kick(random), at, gain);
+    buses.kicks.push(at);
+  };
+  const bass = (at: number, note: number, gain: number, seconds = 0.23) => {
+    if (isReading(at)) return;
+    addMono(buses.ducked, rubberBass(note, seconds), at, gain);
+  };
+  const chord = (at: number, gain: number, seconds = 0.48) => {
+    if (isReading(at)) return;
+    harmonyAt(at).voices.forEach((note, i) => {
+      const voice = chordTone(note, seconds);
+      const pan = (i - 1.5) * 0.24;
       addMono(buses.ducked, voice, at, gain, pan);
-      addMono(buses.send, voice, at, gain * 0.32, pan);
+      addMono(buses.send, voice, at, gain * 0.15, pan);
     });
   };
-  const melody = (start: number, notes: Melody, gain: number, decay = 0.3) => {
-    notes.forEach(([at, note, weight], i) => {
-      const pan = i % 2 === 0 ? -0.24 : 0.24;
-      const voice = pluck(note, 0.2 + weight * 0.13, decay);
-      addMono(buses.ducked, voice, start + at, gain * weight, pan);
-      addMono(buses.send, voice, start + at, gain * weight * 0.28, pan);
+  const melody = (start: number, phrase: Melody, gain = 0.085) => {
+    phrase.forEach(([beat, note, weight], i) => {
+      const at = start + beat * BEAT;
+      if (isReading(at)) return;
+      const voice = pulseLead(note);
+      const pan = i % 2 === 0 ? -0.16 : 0.16;
+      addMono(buses.ducked, voice, at, gain * weight, pan);
+      addMono(buses.send, voice, at, gain * weight * 0.12, pan);
+      // A single quieter dotted-eighth answer makes the motif wide without a pad bed.
+      addMono(buses.send, voice, at + 0.75 * BEAT, gain * weight * 0.08, -pan);
     });
   };
-  const phrase = (
-    start: number,
-    harmony: readonly Harmony[],
-    energy: number,
-    breatheAt: number,
-  ) => {
-    for (const chord of harmony) {
-      sustain(start + chord.at, chord.length + 0.5, chord.voices, 0.029 * energy);
-      // Quarter-note grid with a two-beat bass answer; reading holds lose the backbeat
-      // and halve the pulse. These are musical phrases, never completion stingers.
-      for (let beat = 0; beat * 0.5 < chord.length; beat++) {
-        const local = chord.at + beat * 0.5;
-        const at = start + local;
-        const breathing = local >= breatheAt;
-        const weight = breathing ? 0.52 : 1;
-        if (beat % (breathing ? 4 : 2) === 0) {
-          addMono(buses.dry, kick(random), at, 0.105 * energy * weight);
-          buses.kicks.push(at);
-          addMono(
-            buses.ducked,
-            bassNote(chord.bass, breathing ? 0.65 : 0.42),
-            at,
-            0.064 * energy * weight,
-          );
-        }
-        if (!breathing) {
-          if (beat % 4 === 2) addMono(buses.dry, rim(random), at, 0.04 * energy, 0.12);
-          addMono(buses.dry, hat(random), at + 0.25, 0.023 * energy * (beat % 2 ? 0.65 : 1), -0.25);
-          if (beat % 4 === 3) {
-            addMono(buses.ducked, bassNote(chord.bass + 12, 0.2), at + 0.25, 0.027 * energy);
-          }
-        }
+  const groove = (start: number, end: number, energy: number, dense = false) => {
+    const steps = Math.round(((end - start) / BEAT) * 4);
+    for (let step = 0; step < steps; step++) {
+      const at = start + (step * BEAT) / 4;
+      if (isReading(at)) continue;
+      const position = step % 16;
+      if ([0, 6, 8, 14].includes(position)) drum(at, 0.125 * energy);
+      if (position === 4 || position === 12) {
+        addMono(buses.dry, clap(random), at, 0.052 * energy, 0.08);
       }
+      if (position % 4 === 2 || (dense && position % 4 === 0)) {
+        const accent = position % 4 === 2 ? 1 : 0.44;
+        addMono(buses.dry, hat(random), at, 0.035 * energy * accent, -0.24);
+      }
+      if (dense && position === 15) {
+        addMono(buses.dry, hat(random), at, 0.012 * energy, 0.25);
+      }
+      if ([0, 3, 6, 10, 14].includes(position)) {
+        const octave = position === 3 ? 12 : position === 10 ? 7 : 0;
+        const weight = position === 3 ? 0.54 : position === 10 ? 0.7 : 1;
+        bass(at, harmonyAt(at).root + octave, 0.09 * energy * weight, position === 3 ? 0.13 : 0.22);
+      }
+      if (position === 0 || position === 10) chord(at, 0.025 * energy);
     }
   };
 
-  // A small question, with enough empty space for the opening typography.
-  sustain(0, 3.5, [57, 64, 66], 0.024);
-  melody(
-    0,
-    [
-      [0.2, 74, 0.85],
-      [0.95, 76, 0.6],
-      [2.0, 81, 0.7],
-    ],
-    0.052,
-    0.42,
-  );
+  // Six beats establish the silhouette in sound before the full groove arrives.
+  for (const beat of [0, 2, 4]) {
+    drum(beat * BEAT, 0.09);
+    bass(beat * BEAT, 42, 0.064);
+  }
+  chord(0, 0.022);
+  chord(4 * BEAT, 0.02);
+  for (const beat of [3.5, 4.5, 5.5]) {
+    addMono(buses.dry, hat(random), beat * BEAT, 0.024, -0.2);
+  }
+  melody(0, [
+    [0, 73, 1],
+    [1.5, 76, 0.78],
+    [2.5, 69, 0.84],
+    [4, 78, 0.65],
+  ]);
 
-  phrase(CUTS.mail.start, MAIL_HARMONY, 0.92, 7);
-  melody(
-    CUTS.mail.start,
-    [
-      [0, 74, 1],
-      [0.75, 76, 0.66],
-      [1.5, 81, 0.8],
-      [2.5, 78, 0.88],
-      [3.25, 74, 0.6],
-      [4, 71, 0.8],
-      [4.75, 74, 0.66],
-      [5.5, 78, 0.86],
-      [6.25, 76, 0.7],
-      [8, 74, 0.6],
-      [9.5, 73, 0.48],
-    ],
-    0.068,
-  );
+  groove(CUTS.translate.start, CUTS.translate.end, 0.94);
+  melody(CUTS.translate.start, [
+    [0, 73, 1],
+    [1.5, 76, 0.78],
+    [2.5, 69, 0.84],
+    [4, 76, 0.6],
+    [7.5, 73, 0.82],
+    [9, 76, 0.67],
+    [10, 69, 0.76],
+  ]);
 
-  // The settings bridge suspends the rhythm and opens the upper register.
-  sustain(CUTS.setup.start, 2.7, [59, 64, 69, 74], 0.026);
-  sustain(CUTS.setup.start + 2, 2.6, [57, 61, 64, 71], 0.024);
+  // The fan/stack bridge sheds the kit and bass; register and empty space give it contrast.
+  chord(CUTS.reuse.start, 0.024, 0.8);
+  chord(CUTS.reuse.start + 2.5 * BEAT, 0.016, 0.7);
   melody(
-    CUTS.setup.start,
+    CUTS.reuse.start,
     [
-      [0.5, 83, 0.5],
-      [1.5, 81, 0.42],
-      [3, 76, 0.58],
+      [0.5, 81, 0.7],
+      [2, 80, 0.58],
+      [3.5, 76, 0.7],
     ],
-    0.052,
-    0.5,
+    0.072,
   );
+  for (const [beat, gain] of [
+    [4, 0.012],
+    [4.5, 0.016],
+    [5, 0.019],
+    [5.25, 0.012],
+    [5.5, 0.023],
+    [5.75, 0.015],
+  ] as const) {
+    addMono(buses.dry, hat(random), CUTS.reuse.start + beat * BEAT, gain, -0.14);
+  }
+  bass(CUTS.reuse.end - 0.5 * BEAT, 52, 0.043, 0.15);
 
-  phrase(CUTS.code.start, CODE_HARMONY, 1.08, 5);
-  melody(
-    CUTS.code.start,
-    [
-      [0, 78, 1],
-      [0.5, 81, 0.68],
-      [1.25, 85, 0.74],
-      [1.75, 81, 0.55],
-      [2.5, 83, 0.86],
-      [3.25, 78, 0.68],
-      [4.5, 76, 0.78],
-      [5.5, 74, 0.6],
-      [7.5, 73, 0.56],
-    ],
-    0.069,
-    0.27,
-  );
+  groove(CUTS.prompt.start, CUTS.prompt.end, 1.05, true);
+  melody(CUTS.prompt.start, [
+    [0, 78, 1],
+    [1.5, 81, 0.75],
+    [2.5, 76, 0.8],
+    [8, 73, 0.85],
+    [9.5, 76, 0.7],
+    [10.5, 71, 0.76],
+  ]);
 
-  phrase(CUTS.notes.start, NOTES_HARMONY, 1.12, 7.5);
-  melody(
-    CUTS.notes.start,
-    [
-      [0, 74, 0.95],
-      [0.75, 78, 0.7],
-      [1.5, 83, 0.84],
-      [2.25, 81, 0.76],
-      [3, 78, 0.68],
-      [3.75, 76, 0.52],
-      [4.5, 78, 0.85],
-      [5.25, 76, 0.64],
-      [6.25, 74, 0.7],
-      [8.5, 73, 0.5],
-      [9.5, 76, 0.44],
-    ],
-    0.07,
-  );
+  groove(CUTS.notes.start, CUTS.notes.end, 1.12, true);
+  melody(CUTS.notes.start, [
+    [0, 73, 1],
+    [1.5, 76, 0.78],
+    [2.5, 69, 0.85],
+    [4, 76, 0.72],
+    [5.5, 78, 0.6],
+    [6.5, 81, 0.7],
+    [11, 80, 0.76],
+    [12.5, 76, 0.68],
+    [14, 73, 0.7],
+    [15, 71, 0.58],
+  ]);
 
-  // Resolve once at the cut, then leave the final card to breathe. Shared mastering
-  // retains its 1.6-second tail fade; no new note attacks during that final fade.
-  sustain(CUTS.close.start, 4, [57, 62, 66, 71, 76], 0.029);
-  addMono(buses.ducked, bassNote(38, 2.5), CUTS.close.start, 0.047);
+  // Suspended motion becomes A major at 22 seconds. No attacks occur in the final tail.
+  drum(CUTS.close.start, 0.082);
+  bass(CUTS.close.start, 40, 0.064, 0.5);
+  chord(CUTS.close.start, 0.023, 0.8);
   melody(
     CUTS.close.start,
     [
-      [0, 74, 0.76],
-      [0.75, 69, 0.5],
-      [1.5, 74, 0.4],
+      [0, 76, 0.72],
+      [1.5, 73, 0.58],
+      [3, 69, 0.75],
     ],
-    0.054,
-    0.5,
+    0.07,
   );
+  const resolveAt = CUTS.close.start + 3 * BEAT;
+  chord(resolveAt, 0.026, 1.95);
+  bass(resolveAt, 45, 0.06, 1.7);
   return buses;
 }
 
-/** Editorial boundaries only; clicks, typing, execution and completion stay silent. */
+/** Shape travel has editorial air accents; selections, commands and results have no sounds. */
 export function commandCues(): EffectBuses {
-  const cues = createCues(1014, { seconds: COMMAND_DURATION, levelAt: () => 1 });
-  cues.place(swoosh(cues.random, 0.5, 550, 1350), CUTS.open.start + 0.06, 0.035, 0, 0.06);
-  const duration = HANDOFF * 2;
-  for (const [id, gain, from, to] of [
-    ['mail', 0.065, 1500, 620],
-    ['setup', 0.04, 1250, 520],
-    ['code', 0.055, 1700, 700],
-    ['notes', 0.06, 1400, 650],
+  const cues = createCues(1501025, { seconds: COMMAND_DURATION, levelAt: () => 1 });
+  for (const [travelAt, duration, gain, from, to, direction] of [
+    [MOTION.draft, 0.38, 0.044, 650, 2300, 1],
+    [MOTION.fan, 0.46, 0.047, 2400, 550, -1],
+    [MOTION.composer, 0.4, 0.058, 850, 3100, 1],
+    [MOTION.notes, 0.5, 0.052, 2100, 650, -1],
+    [MOTION.brand, 0.64, 0.05, 2600, 420, 1],
   ] as const) {
     cues.travel(
       swoosh(cues.random, duration, from, to),
-      CUTS[id].start - HANDOFF,
+      travelAt + 0.02,
       gain,
-      (t) => 0.18 - (0.36 * t) / duration,
-      0.08,
+      (t) => direction * (-0.3 + (0.6 * t) / duration),
+      0.06,
     );
   }
-  cues.place(swoosh(cues.random, 0.5, 1100, 400), CUTS.close.start - 0.48, 0.045, 0, 0.06);
-  cues.place(glass(74), CUTS.close.start, 0.016, -0.12, 0.12);
-  cues.place(glass(81), CUTS.close.start, 0.006, 0.12, 0.12);
   return cues.buses;
 }

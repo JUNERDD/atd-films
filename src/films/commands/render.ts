@@ -7,7 +7,7 @@ export const cuts = {
     id: 'AtdCommandsZh',
     output: 'out/atd-commands-zh.mp4',
     film: 'commands',
-    previewSeconds: [1.6, 6.55, 11.5, 16.2, 22.8, 30.3, 35.5, 40.5],
+    previewSeconds: [0.85, 3.15, 4.8, 8.0, 11.8, 16.15, 18.2, 23.0],
   },
 } as const satisfies Record<string, RenderCut>;
 

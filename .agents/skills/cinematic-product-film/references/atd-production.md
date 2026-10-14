@@ -4,17 +4,17 @@ Paths below are relative to the film repository. Read its `AGENTS.md` and the ta
 
 ## Ownership and reusable parts
 
-| Concern                | Owner / reusable API                                                                                 |
-| ---------------------- | ---------------------------------------------------------------------------------------------------- |
-| Commands film          | `src/films/commands/` — composition, content, styles, timeline, camera, score and render recipe      |
-| Full-film registration | `src/Root.tsx` — literal composition IDs; Commands duration and fps already derive from its timeline |
-| Node render catalog    | `src/films/catalog.ts` — film-local `render.ts` recipes                                              |
-| Product controls       | `src/shared/product/SelectionCapsule.tsx`, `CommandIsland.tsx`, `OptionsMenu.tsx`, `run-output.ts`   |
-| World and pointer      | `src/shared/world/MacWindow.tsx`, `Camera.tsx`, `camera.ts`, `Cursor.tsx`, `cursor.ts`               |
-| Deterministic motion   | `src/shared/motion/spring.ts`, `ease.ts`                                                             |
-| Original audio         | `src/shared/audio/instruments.ts`, `effects.ts`, `cue-bus.ts`, `master.ts`                           |
-| Font preparation       | Film `fonts.ts` / `content.ts` → `src/shared/fonts.ts`                                               |
-| Snapshot provenance    | `assets/manifest.json`, `THIRD_PARTY.md`                                                             |
+| Concern                | Owner / reusable API                                                                                         |
+| ---------------------- | ------------------------------------------------------------------------------------------------------------ |
+| Commands film          | `src/films/commands/` — composition, content, styles, timeline, object choreography, score and render recipe |
+| Full-film registration | `src/Root.tsx` — literal composition IDs; Commands duration and fps already derive from its timeline         |
+| Node render catalog    | `src/films/catalog.ts` — film-local `render.ts` recipes                                                      |
+| Product controls       | `src/shared/product/SelectionCapsule.tsx`, `CommandIsland.tsx`, `OptionsMenu.tsx`, `run-output.ts`           |
+| World and pointer      | `src/shared/world/MacWindow.tsx`, `Camera.tsx`, `camera.ts`, `Cursor.tsx`, `cursor.ts`                       |
+| Deterministic motion   | `src/shared/motion/spring.ts`, `ease.ts`                                                                     |
+| Original audio         | `src/shared/audio/instruments.ts`, `effects.ts`, `cue-bus.ts`, `master.ts`                                   |
+| Font preparation       | Film `fonts.ts` / `content.ts` → `src/shared/fonts.ts`                                                       |
+| Snapshot provenance    | `assets/manifest.json`, `THIRD_PARTY.md`                                                                     |
 
 Prefer film-local composition over changes to the shared kit. Shared modules cannot import a film, and films cannot import each other. Read callers before changing an exported component; a shared style edit can alter older releases even when their TypeScript is unchanged.
 
@@ -26,11 +26,13 @@ For a film-specific face, keep its loading and CSS in that film. The Commands re
 
 ## Coordinates and clocks
 
-The Commands recreation uses a 1600 × 900 logical-point desktop scaled by 1.2 into a 1920 × 1080 frame. Window positions, menus and pointer coordinates belong to the same point space. Shared camera focal coordinates are frame pixels. Apply the conversion once; an editorial stage around the desktop must transform pointer and UI together.
+The current Commands cut uses a 1920 × 1080 editorial stage, 24 seconds at 60 fps, with overlapping object choreography on one global clock. The 150 BPM musical grid puts one beat every 24 frames. Narrative ranges identify events; they must not abruptly switch visibility while objects are still travelling. Its controls are magnified, deterministic film recreations. No desktop or camera wrapper is required by the repository.
+
+When using the shared desktop kit in another cut, its 1600 × 900 logical-point space scales by 1.2 into the output frame. Keep windows, menus and pointers in the same space. Shared camera focal coordinates are frame pixels, so convert exactly once and transform pointer and UI together.
 
 `cameraAt()` interprets each shot's `at` as the start of movement toward that shot. Its initial shot is the prior resting state. Reading time must account for spring settlement. Motion blur derives from velocity; excessive zoom or overlapping moves can hide content longer than the raw shot timestamps suggest.
 
-`CommandIsland` consumes `IslandMoment[]` on its provided `t` clock. Its anchor is the horizontal center and bottom of the surface, so a card grows upward from that point. `SelectionCapsule` uses its top-left origin. `OptionsMenu` has a separate origin. Keep all three visible when changing crops or layout.
+`CommandIsland` consumes `IslandMoment[]` on its provided `t` clock. Its anchor is the horizontal center and bottom of the surface, so a card grows upward from that point. `SelectionCapsule` uses its top-left origin. `OptionsMenu` has a separate origin. When changing crops or layout, keep the controls needed by the current interaction state visible and unclipped; they need not all appear together.
 
 If a `Sequence` gets transition pre-roll, compensate in its scene clock. Otherwise source input, cursor actions, audio and render samples drift by the handle duration. Prefer timeline-owned constants over duplicated seconds in scene components and preview scripts.
 
@@ -57,7 +59,7 @@ pnpm render:commands
 
 `scripts/command-preview.ts` owns detailed review frames and encoded transition clips. Film `render.ts` supplies the generic `pnpm preview commands-zh` sample seconds. Both need new moments after a timeline rewrite. `scripts/render.ts commands-zh --frames=A-B` writes a partial encode under `out/previews/`, preserving the full movie.
 
-The existing public contract is composition `AtdCommandsZh` and output `out/atd-commands-zh.mp4`. A requested creative revision may change duration; update all timing-dependent documentation and samples together. `src/Root.tsx` already calculates Commands duration from `timeline.ts`.
+The existing public contract is composition `AtdCommandsZh` and output `out/atd-commands-zh.mp4`. A requested creative revision may change duration and frame rate; update timing-dependent documentation and samples together. `src/Root.tsx` calculates both from `timeline.ts`.
 
 Generated WAVs/stems in `public/audio/` and renders in `out/` are ignored. Use these for review and delivery; keep original reference downloads and disposable inspection scripts in ignored `tmp/`. No product app, service, personal account, or desktop capture is necessary.
 

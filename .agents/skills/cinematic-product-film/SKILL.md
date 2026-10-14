@@ -19,6 +19,7 @@ Write a short beat sheet with these fields for each beat:
 - Exact visible before/action/after, including who performs each action.
 - Framing and the one thing the viewer should look at.
 - Entry, reading hold, exit, and musical role.
+- The object inherited from the previous beat and how it becomes the next one.
 
 Use source-grounded, public fictional content. Preserve the meaningful facts through transformations. Distinguish the featured capability from another application's subsequent work. A command that rewrites a prompt should be proven by the improved prompt; a downstream code fix needs an explicit handoff if it belongs in the story at all.
 
@@ -46,7 +47,11 @@ The useful motion unit is **arrive → act → reveal → read → leave**. A se
 
 Choose a small motion vocabulary for this film. A confident cut, matched shape, masked type reveal, or motivated push can provide contrast without adding a new transition for every beat. Reserve fast blur and perspective for travel, then resolve to sharp, level UI. Inspect intermediate frames: a transition that works at its endpoints may still double text, expose a blank stage, or clip a menu.
 
-Reuse the existing deterministic Remotion, camera, spring, cursor, and product components. Recompose them freely within the film; do not introduce a parallel animation framework or reshape shared components solely for one cut.
+For a lively direction, design object motion separately from framing. Let a selected block stretch into a control, a result shrink into a reusable card, or a chosen card expand into the next working surface. Carry a recognizable shape or content across the handoff. Begin supporting arrivals during the primary travel, then use a small stagger or secondary rotation to establish hierarchy. Make acceleration, contact/compression, and settlement distinct phases; one global camera spring cannot supply all three. A fade between unrelated windows does not establish continuity.
+
+Give every pause a reading or anticipation purpose. Remove repeated simulated execution waits; after the first demonstration, a compressed operation can still preserve input → invocation → one write. Compare the time spent waiting with the time spent revealing useful information. Shorten copy before shortening its necessary reading hold. Higher frame rate improves sampling, but cannot fix a repeated zoom/wait/zoom template.
+
+Reuse Remotion's deterministic frame APIs and suitable existing components. The current film's scene framework, full desktop framing, camera rig, score and script are creative choices, not constraints on a rebuild. Prefer a film-local composition when the shared kit does not fit; do not build a parallel animation framework or reshape shared components solely for one cut.
 
 ## Compose sound with the edit
 
@@ -58,6 +63,8 @@ Keep soundtrack and editorial transitions separate from product sounds. Atd does
 
 Implement the accepted beat sheet in the film-owned files, keeping other films and shared assets stable. Update the font sample when adding copy and keep the review moments aligned with the new timeline.
 
-Validate source, then inspect representative stills, cut boundaries, and an encoded sequence with sound. A full-rebuild request needs a complete playable render. Verify output dimensions, duration, frame rate, audio, first and last frames, and the important before/after states. Check the film at a reduced viewing size as well as full resolution.
+Validate source, then inspect representative stills and encoded motion through every important handoff. Decode dense consecutive samples around fast moves (roughly 10–15 samples per second is a useful diagnostic) to find discontinuities, duplicated text, interrupted arcs and unintended clipping. Check full-speed playback when available; neither a few endpoint stills nor a frame-rate label establishes smoothness. Inspect at a reduced viewing size as well as full resolution.
+
+A full-rebuild request needs a complete playable render with sound. Verify dimensions, duration, frame rate, audio, first/last frames, and important before/after states. Audit the final temporal structure: successive shots should have distinct movement roles, useful reading holds, and purposeful exits. Revisit the choreography if the film still feels like a slideshow, even when its frames look polished.
 
 Report the actual movie and reusable skill paths, the reference source, the checks completed, and any material limitation. Distinguish static frame inspection, motion inspection, and listening; one does not establish the others.

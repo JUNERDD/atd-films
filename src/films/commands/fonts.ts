@@ -7,9 +7,7 @@ import { FILM_TEXT } from './content.ts';
 const SAMPLE =
   COMMON_TEXT +
   FILM_TEXT +
-  '问目标语言确认英语按住打开选项选中正文草稿收件人主题原型评审高个人工作所有' +
-  '好方法随手可用情景演示示例内容节奏经过编排快捷键为自定义示例新建命令设置快捷键' +
-  '分组方式负责人提取待办事项补齐约束与验收条件翻译选中的文本并保留原有格式把笔记整理成下一步行动清单';
+  '英语已保存草稿未发送编程助手备忘录上线讨论显示在对话中输出位置插入选区后';
 
 let displayReady = false;
 let displayLoading: Promise<void> | undefined;

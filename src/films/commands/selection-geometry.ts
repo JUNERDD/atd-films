@@ -12,3 +12,9 @@ export function toolbarTargets(origin: Point, command: string) {
     chevron: { x: commandLeft + commandWidth + 14, y: origin.y + 18 },
   };
 }
+
+/** Same 2.6× point space as the magnified native control, inside its moving paper. */
+export function controlTarget(name: string, x: number, y: number) {
+  const target = toolbarTargets({ x: 0, y: 0 }, name).command;
+  return { x: x + target.x * 2.6, y: y + target.y * 2.6 };
+}

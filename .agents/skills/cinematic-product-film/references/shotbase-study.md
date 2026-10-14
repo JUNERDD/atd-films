@@ -6,7 +6,7 @@ Researched 2026-10-14. This is a visual reference study, not an asset license or
 
 The principal reference is [The capture tool your  Mac should have had](https://www.youtube.com/watch?v=MoWSwxZGk_0), published by Shotbase on 2026-08-25. The [official website's YouTube destination](https://shotbase.com/go/youtube) points to `@shotbaseapp`; the video's player metadata identifies the same channel (`UCpNvHBiUI7427kd4c_P53Vw`).
 
-The inspected video stream is 1920 × 1080, 60 fps, 58.200 seconds; its AAC track is stereo at 44.1 kHz. Research used actual video frames at 0.5-second intervals across the whole film and denser samples at two transitions. The YouTube storyboard was used for discovery and then checked against the encoded film. Reference media remains disposable research material outside source assets.
+The inspected video stream is 1920 × 1080, 60 fps, 58.200 seconds. The first encoding had stereo AAC at 44.1 kHz; the later reacquisition had Opus audio and a 58.234-second mux duration. Research first sampled actual video frames at 0.5-second intervals across the whole film, then inspected 264 consecutive frames at 12 fps across 1–10, 15–24 and 50–54 seconds to study motion. The YouTube storyboard was used for discovery and checked against the encoded film. Reference media remains disposable research material outside source assets.
 
 The homepage also contains short background and feature loops. A discovered 21.48-second silent ocean clip is background material, not this launch film. A third-party AI recreation with a similar duration is also not the source. Use the publisher chain above when revisiting the study.
 
@@ -48,6 +48,22 @@ The original track was acquired, but the research environment did not support mo
 Technical measurement of the downloaded encoding returned approximately −11.92 LUFS integrated, 5.3 LU loudness range, and +2.13 dB true peak. These measurements are not listening and are not recommended mastering targets; in particular, do not reproduce the positive true peak.
 
 For an original Atd film, design a new score and picture-driven accents within its silent-product constraint, then measure the master and listen when that capability is available. This is a production recommendation, not an observation about Shotbase's soundtrack.
+
+## Dense motion observations
+
+These timings are bounded to approximately one 12 fps research sample, not measurements of the original animation rig or easing curves.
+
+| Sampled interval | Visible motion                                                                                                                                                |
+| ---------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 1.583–2.417 s    | Keys give way to a compact mode control; that same control stretches into a toolbar while the pointer enters.                                                 |
+| 6.250–7.583 s    | Captured content becomes a smaller card; metadata enters before its scale/position change finishes.                                                           |
+| 7.750–9.167 s    | Tags arrive in steps; metadata recedes; the card narrows, tilts and travels into an arriving folder that rocks before settling.                               |
+| 15.667–16.917 s  | Thumbnails stagger in, a tile flips as rows appear, then the selected background grows into the next canvas.                                                  |
+| 17.000–20.750 s  | Controls arrive in stages; later one screenshot pose exits upward while its transformed pose enters from below with rotation.                                 |
+| 21.667–23.917 s  | The editor resolves into an enlarged Static button. A click compresses it, a blue response reveals Motion, then it shrinks upward as the next canvas arrives. |
+| 50.167–53.667 s  | A directional cyan pixel sweep precedes a large wordmark event, then the icon settles on black while closing lines arrive sequentially.                       |
+
+The visible continuity, stagger, overlapping handoffs, shaped exits and compression/rebound explain more of this direction than a camera zoom alone. This is a filmmaking interpretation supported by the samples; the source curves, rig, exact overshoot and blur implementation remain unknown. Vary movement roles while keeping the decisive reading surface stable. For production experiments, short anticipation, rapid travel, a controlled settle, and lightly staggered supporting arrivals are useful starting points, then judge the encoded result.
 
 ## Adaptation to Atd
 

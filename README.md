@@ -24,7 +24,7 @@ For an isolated Studio instance, choose a free port, for example `pnpm studio --
 | ----------------- | ---------------------------- | -------- | ------------------- | ---------------------------------------------- |
 | Launch            | `AtdPromo`, `AtdPromoZh`     | 64 s     | 1920 × 1080, 60 fps | [launch](src/films/launch/README.md)           |
 | Release 0.8       | `AtdRelease`, `AtdReleaseZh` | 60 s     | 1920 × 1080, 60 fps | [release-0.8](src/films/release-0.8/README.md) |
-| Command workflows | `AtdCommandsZh`              | 42 s     | 1920 × 1080, 30 fps | [commands](src/films/commands/README.md)       |
+| Command workflows | `AtdCommandsZh`              | 24 s     | 1920 × 1080, 60 fps | [commands](src/films/commands/README.md)       |
 
 Studio also keeps the launch and release scene compositions and the `WorldSheet`,
 `ProductSheet`, and `R08WorldSheet` component review compositions.
@@ -38,8 +38,8 @@ Run these commands from this repository's root; the old workspace `--filter` is 
 | `pnpm studio`                            | Prepare soundtracks and open the interactive preview                      |
 | `pnpm preview`                           | Representative PNGs for all five cuts under `out/previews/<composition>/` |
 | `pnpm preview en release-zh commands-zh` | PNGs for selected cuts                                                    |
-| `pnpm preview:commands`                  | Twenty-two detailed command-film review frames                            |
-| `pnpm preview:commands --transitions`    | Boundary frames and five short transition clips                           |
+| `pnpm preview:commands`                  | Twenty-three detailed command-film review frames                          |
+| `pnpm preview:commands --transitions`    | Forty-six handoff frames and five encoded motion clips                    |
 | `pnpm render`                            | Full English and Chinese launch films                                     |
 | `pnpm render:en`, `pnpm render:zh`       | One launch-film language                                                  |
 | `pnpm render:release`                    | Both release-film languages (`:en` or `:zh` for one)                      |
@@ -63,7 +63,7 @@ src/
   films/
     launch/            # Initial film, narrative, scenes, timing, and score
     release-0.8/       # Ink & Caret world and release-specific choreography
-    commands/          # Command workflows and their desktop scenes
+    commands/          # Kinetic Command story, continuous objects, and score
     catalog.ts         # Node-side assembly of film-owned render recipes
   shared/
     product/           # Deterministic recreations of product UI
