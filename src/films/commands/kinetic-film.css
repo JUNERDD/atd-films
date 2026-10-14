@@ -1,0 +1,116 @@
+.film.command-film-v2 {
+  --c2-paper: #fff;
+  --c2-stage: #f5f4ef;
+  --c2-ink: #17191e;
+  --c2-muted: #838892;
+  --c2-blue: #1552f0;
+  --c2-selection: #d5e2ff;
+  --c2-line: #e8e9ed;
+  overflow: hidden;
+  isolation: isolate;
+  background: var(--c2-stage);
+  color: var(--c2-ink);
+  font-family: 'Inter Variable', 'Noto Sans SC Variable', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  font-feature-settings: 'cv11', 'ss01';
+}
+
+.command-film-v2 * {
+  box-sizing: border-box;
+}
+.command-film-v2 p {
+  margin: 0;
+}
+
+.c2-opening-label {
+  position: absolute;
+  z-index: 25;
+  left: 84px;
+  top: 64px;
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  font-family: 'Sora', sans-serif;
+  font-size: 28px;
+  font-weight: 550;
+  opacity: var(--o);
+}
+.c2-small-mark {
+  width: 34px;
+  height: 34px;
+}
+
+.c2-intro-word,
+.c2-intro-command {
+  position: absolute;
+  z-index: 25;
+  left: 0;
+  right: 0;
+  top: 410px;
+  text-align: center;
+  color: var(--c2-paper);
+  font-size: 140px;
+  line-height: 1.25;
+  font-weight: 600;
+  letter-spacing: -6px;
+  white-space: nowrap;
+  opacity: var(--o);
+  transform: translateY(calc(var(--y) * 1px)) scale(var(--s, 1));
+}
+.c2-intro-command {
+  font-size: 118px;
+  top: 427px;
+}
+.c2-intro-command b {
+  font-family: 'Sora', sans-serif;
+  font-weight: 580;
+  letter-spacing: -6px;
+}
+
+.c2-proof-title {
+  position: absolute;
+  z-index: 25;
+  top: 124px;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: center;
+  font-size: 86px;
+  line-height: 1.35;
+  letter-spacing: -3px;
+  font-weight: 520;
+  opacity: var(--o);
+}
+.c2-letter-mask {
+  overflow: hidden;
+  display: inline-flex;
+  padding-bottom: 10px;
+}
+.c2-letter-mask > span {
+  display: block;
+  transform: translateY(calc((1 - var(--reveal)) * 125%));
+}
+.c2-reuse-title {
+  position: absolute;
+  z-index: 25;
+  top: 122px;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: center;
+  gap: 24px;
+  overflow: hidden;
+  font-size: 82px;
+  line-height: 1.3;
+  font-weight: 520;
+  letter-spacing: -3px;
+  opacity: var(--o);
+}
+.c2-reuse-title > * {
+  display: block;
+  transform: translateY(calc((1 - var(--reveal)) * 130%));
+}
+.c2-reuse-title strong {
+  color: var(--c2-blue);
+  font-weight: inherit;
+}

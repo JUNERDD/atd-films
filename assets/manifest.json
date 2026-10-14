@@ -147,6 +147,18 @@
       "sha256": "15f4bc7706ff917995f7c380a56db09e9b1c8cf081b30db8409cd0ea72450cb4",
       "source": "https://github.com/JUNERDD/Atd/blob/0740a767d3d7bc31b0e5a91d90e14567fd2d8723/apps/website/public/cases/layers/desktop.webp",
       "transformation": "Existing film snapshot: ffmpeg crop=iw:ih-250:0:60, one JPEG frame at q:v=2; removes the menu bar and Dock."
+    },
+    {
+      "path": "public/command-film/fonts/sora-variable.ttf",
+      "sha256": "84ff7096ae3ec6c8be47d906d1a0ba4de7f2ce78c615275c77301964a316e16c",
+      "source": "https://raw.githubusercontent.com/google/fonts/a926665019d3f7f25c8b1212cecbfa871e70de82/ofl/sora/Sora%5Bwght%5D.ttf",
+      "transformation": "Unchanged upstream snapshot; SIL Open Font License 1.1."
+    },
+    {
+      "path": "licenses/sora-OFL.txt",
+      "sha256": "ba0b9729c9428ba79a0459ab8ec575791b51509dbec213e383d0316d37fec299",
+      "source": "https://raw.githubusercontent.com/google/fonts/a926665019d3f7f25c8b1212cecbfa871e70de82/ofl/sora/OFL.txt",
+      "transformation": "Unchanged upstream snapshot; SIL Open Font License 1.1."
     }
   ]
 }

@@ -1,0 +1,94 @@
+.c2-command-control {
+  position: relative;
+  opacity: var(--o);
+  transform: translateY(calc(var(--lift) * 1px));
+}
+.c2-native-toolbar {
+  position: absolute;
+  left: 0;
+  top: 0;
+  transform: scale(2.6);
+  transform-origin: top left;
+}
+.c2-native-toolbar .glass {
+  background: #292c34;
+  box-shadow:
+    inset 0 0 0 1px #41454f,
+    0 10px 20px -8px rgb(25 32 48 / 0.25);
+  backdrop-filter: none;
+}
+.c2-saved-value {
+  position: absolute;
+  left: 514px;
+  top: 27px;
+  font-size: 32px;
+  color: var(--c2-muted);
+  line-height: 1.2;
+  white-space: nowrap;
+}
+.c2-output-choice {
+  position: absolute;
+  left: 846px;
+  top: 270px;
+  width: 482px;
+  opacity: var(--o);
+  transform: translateY(calc(var(--lift) * 1px));
+  color: var(--c2-ink);
+}
+.c2-output-label {
+  font-size: 28px;
+  line-height: 40px;
+  color: var(--c2-muted);
+}
+.c2-output-field {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 66px;
+  border: 2px solid var(--c2-line);
+  border-radius: 18px;
+  padding: 0 19px;
+  font-size: 32px;
+  background: var(--c2-paper);
+}
+.c2-output-field > svg {
+  width: 26px;
+  height: 26px;
+}
+.c2-output-menu {
+  position: absolute;
+  z-index: 3;
+  top: 118px;
+  left: 0;
+  right: 0;
+  padding: 8px;
+  border: 1px solid #dbdee6;
+  border-radius: 23px;
+  background: #fff;
+  box-shadow: 0 16px 35px -8px rgb(20 31 52 / 0.16);
+  opacity: var(--menu-o);
+}
+.c2-output-option {
+  position: relative;
+  display: flex;
+  align-items: center;
+  height: 64px;
+  padding-left: 47px;
+  font-size: 32px;
+  line-height: 1.1;
+  border-radius: 15px;
+}
+.c2-output-option > svg {
+  position: absolute;
+  left: 12px;
+  width: 27px;
+  height: 27px;
+  opacity: 0;
+}
+.c2-output-option[data-picked] {
+  background: var(--c2-blue);
+  color: #fff;
+}
+.c2-output-option[data-picked] > svg {
+  opacity: 1;
+}
