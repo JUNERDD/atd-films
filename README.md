@@ -24,7 +24,7 @@ For an isolated Studio instance, choose a free port, for example `pnpm studio --
 | ----------------- | ---------------------------- | -------- | ------------------- | ---------------------------------------------- |
 | Launch            | `AtdPromo`, `AtdPromoZh`     | 64 s     | 1920 × 1080, 60 fps | [launch](src/films/launch/README.md)           |
 | Release 0.8       | `AtdRelease`, `AtdReleaseZh` | 60 s     | 1920 × 1080, 60 fps | [release-0.8](src/films/release-0.8/README.md) |
-| Command workflows | `AtdCommandsZh`              | 38 s     | 1920 × 1080, 30 fps | [commands](src/films/commands/README.md)       |
+| Command workflows | `AtdCommandsZh`              | 42 s     | 1920 × 1080, 30 fps | [commands](src/films/commands/README.md)       |
 
 Studio also keeps the launch and release scene compositions and the `WorldSheet`,
 `ProductSheet`, and `R08WorldSheet` component review compositions.
@@ -38,7 +38,7 @@ Run these commands from this repository's root; the old workspace `--filter` is 
 | `pnpm studio`                            | Prepare soundtracks and open the interactive preview                      |
 | `pnpm preview`                           | Representative PNGs for all five cuts under `out/previews/<composition>/` |
 | `pnpm preview en release-zh commands-zh` | PNGs for selected cuts                                                    |
-| `pnpm preview:commands`                  | Seventeen detailed command-film review frames                             |
+| `pnpm preview:commands`                  | Twenty-two detailed command-film review frames                            |
 | `pnpm preview:commands --transitions`    | Boundary frames and five short transition clips                           |
 | `pnpm render`                            | Full English and Chinese launch films                                     |
 | `pnpm render:en`, `pnpm render:zh`       | One launch-film language                                                  |
@@ -78,6 +78,9 @@ scripts/               # Shared preview, render, soundtrack, and asset tools
 ```
 
 See [architecture and adding a film](docs/architecture.md) and [agent guidance](AGENTS.md).
+For cinematic feature promos, use the repository's
+[cinematic-product-film skill](.agents/skills/cinematic-product-film/SKILL.md), including its
+timestamped study of Shotbase's official launch film and the Atd production map.
 Shared code does not depend on a film, and films do not import one another. The product
 repository remains the source of truth for application behavior and canonical brand assets;
 film snapshots update deliberately, against an identified product commit.

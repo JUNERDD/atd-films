@@ -10,39 +10,39 @@ import { MacDesktop } from './MacDesktop.tsx';
 import { EditorialCaption } from './EditorialCaption.tsx';
 import { CODE as B } from './timeline.ts';
 import { pointerPresence, useChapterTime } from './editing.ts';
+import { toolbarTargets } from './selection-geometry.ts';
 
+const TOOL = { x: 452, y: 327 };
 const MOMENTS: IslandMoment[] = [
   { at: B.run, content: { kind: 'working', command: '完善编程需求' } },
   { at: B.write, content: { kind: 'writing' } },
   { at: B.done, content: { kind: 'done' } },
 ];
 
-const POINTER: CursorKey[] = [
-  { at: 0, x: 1025, y: 719 },
-  { at: B.drag - 0.12, x: 322, y: 557, travel: 0.3 },
-  { at: B.drag, x: 322, y: 557, press: 'down' },
-  { at: B.select, x: 714, y: 584, press: 'up', travel: B.select - B.drag },
-  { at: B.hover, x: 487, y: 511, travel: 0.3 },
-  { at: B.click, x: 487, y: 511, press: true },
-  { at: B.run + 0.3, x: 901, y: 751, travel: 0.3 },
-  { at: B.sendHover, x: 866, y: 700, travel: 0.28 },
-  { at: B.sendClick, x: 866, y: 700, press: true },
-  { at: B.sent + 0.4, x: 970, y: 730, travel: 0.3 },
-];
-
 export function CodeScene() {
   const t = useChapterTime('code');
-  const pointer = cursorAt(
-    t,
-    POINTER.map((key) =>
-      key.at === B.select ? { ...key, x: 322 + textWidthAt(PROMPT_BEFORE[1] ?? '', 400, 16) } : key,
-    ),
-  );
+  const button = toolbarTargets(TOOL, '完善编程需求').command;
+  const keys: CursorKey[] = [
+    { at: 0, x: 1140, y: 625 },
+    { at: B.drag - 0.12, x: 452, y: 400, travel: 0.3 },
+    { at: B.drag, x: 452, y: 400, press: 'down' },
+    {
+      at: B.select,
+      x: 452 + textWidthAt(PROMPT_BEFORE[1] ?? '', 400, 24),
+      y: 440,
+      press: 'up',
+      travel: B.select - B.drag,
+    },
+    { at: B.hover, ...button, travel: 0.28 },
+    { at: B.click, ...button, press: true },
+    { at: B.run + 0.3, x: 1160, y: 660, travel: 0.3 },
+  ];
+  const pointer = cursorAt(t, keys);
   return (
     <MacDesktop t={t} scene="code" overlay={<EditorialCaption scene="code" t={t} />}>
       <CodingWindow t={t} pointer={pointer} />
       {t >= B.toolbar && t < B.run && (
-        <div className="cf-native-tool" style={{ '--x': 322, '--y': 493 }}>
+        <div className="cf-native-tool" style={{ '--x': TOOL.x, '--y': TOOL.y }}>
           <SelectionCapsule
             lang="zh"
             commands={['完善编程需求']}
@@ -58,10 +58,10 @@ export function CodeScene() {
         lang="zh"
         t={t}
         moments={MOMENTS}
-        anchor={{ x: 800, y: 797 }}
+        anchor={{ x: 800, y: 690 }}
         exit={B.dismiss}
       />
-      <Cursor state={pointer} size={1.1} opacity={pointerPresence(t, B.sent + 1.1)} />
+      <Cursor state={pointer} size={1.25} opacity={pointerPresence(t, B.run + 0.35)} />
     </MacDesktop>
   );
 }

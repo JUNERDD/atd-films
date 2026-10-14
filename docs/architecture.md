@@ -38,8 +38,10 @@ remain shared. Existing composition IDs, timing, and output filenames are preser
 The runtime asset set is small enough to check in: source SVGs, the existing cropped
 wallpaper, and 256-pixel application icon snapshots. The manifest records their origin,
 transformation, and hashes. Normal rendering neither imports the product checkout nor
-extracts installed application resources. Fonts come from exact Fontsource versions;
-soundtracks are synthesized locally from the film's own timeline.
+extracts installed application resources. Fonts come from exact Fontsource versions or
+checked-in, licensed snapshots with immutable provenance and hashes. Films may combine
+free typefaces by editorial role; film-specific loading stays within the film.
+Soundtracks are synthesized locally from the film's own timeline.
 
 Asset updates are reviewed snapshot changes, not automatic synchronization. Preserve
 the old source tag and lockfile when delivering a film. A deliberate creative revision

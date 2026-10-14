@@ -3,9 +3,23 @@ import { mkdirSync, rmSync } from 'node:fs';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { bundle } from '@remotion/bundler';
-import { ensureBrowser, renderMedia, renderStill, selectComposition } from '@remotion/renderer';
+import {
+  ensureBrowser,
+  openBrowser,
+  renderMedia,
+  renderStill,
+  selectComposition,
+} from '@remotion/renderer';
 import { ENCODING } from '../render-settings.ts';
-import { CHAPTERS, CODE, MAIL, NOTES, CUTS, frames } from '../src/films/commands/timeline.ts';
+import {
+  CHAPTERS,
+  CODE,
+  MAIL,
+  NOTES,
+  CUTS,
+  COMMAND_FPS,
+  frames,
+} from '../src/films/commands/timeline.ts';
 
 const root = join(dirname(fileURLToPath(import.meta.url)), '..');
 const transitions = process.argv.includes('--transitions');
@@ -16,26 +30,36 @@ const serveUrl = await bundle({
   entryPoint: join(root, 'src', 'index.ts'),
   symlinkPublicDir: true,
 });
+const browser = await openBrowser('chrome');
 try {
-  const composition = await selectComposition({ serveUrl, id: 'AtdCommandsZh' });
+  const composition = await selectComposition({
+    serveUrl,
+    id: 'AtdCommandsZh',
+    puppeteerInstance: browser,
+  });
   const sceneSamples = [
-    ['opening', 1.2],
-    ['commands', CUTS.setup.start + 1.5],
+    ['opening', 1.6],
+    ['mail-selection', CUTS.mail.start + MAIL.select + 0.2],
+    ['mail-hold', CUTS.mail.start + MAIL.press + 0.35],
+    ['mail-options', CUTS.mail.start + MAIL.move + 0.2],
+    ['mail-language', CUTS.mail.start + MAIL.picked + 0.2],
+    ['mail-writing', CUTS.mail.start + MAIL.write + 0.05],
+    ['mail-result', CUTS.mail.start + MAIL.done + 0.6],
+    ['mail-read', CUTS.mail.end - 1.4],
+    ['commands', CUTS.setup.start + 2.2],
+    ['code-before', CUTS.code.start + 0.4],
     ['code-selection', CUTS.code.start + CODE.hover],
     ['code-click', CUTS.code.start + CODE.click],
-    ['code-writing', CUTS.code.start + CODE.write + 0.25],
     ['code-prompt', CUTS.code.start + CODE.written + 0.8],
-    ['code-send', CUTS.code.start + CODE.sendClick],
-    ['code-working', CUTS.code.start + CODE.verify + 0.4],
-    ['code-result', CUTS.code.start + CODE.complete + 0.3],
-    ['mail-options', CUTS.mail.start + MAIL.move + 0.2],
-    ['mail-result', CUTS.mail.start + MAIL.done + 0.3],
+    ['code-read', CUTS.code.end - 1.5],
+    ['notes-before', CUTS.notes.start + 0.4],
     ['notes-menu-click', CUTS.notes.start + NOTES.menuClick],
     ['notes-options', CUTS.notes.start + NOTES.pickClick],
     ['notes-run', CUTS.notes.start + NOTES.runClick],
-    ['notes-result', CUTS.notes.start + NOTES.done + 0.3],
-    ['notes-detail', CUTS.notes.end - 0.5],
-    ['closing', CUTS.close.start + 1.5],
+    ['notes-result', CUTS.notes.start + NOTES.done + 0.6],
+    ['notes-detail', CUTS.notes.end - 1],
+    ['closing', CUTS.close.start + 1.8],
+    ['final-hold', CUTS.close.end - 1 / COMMAND_FPS],
   ] as const;
   const handoffs = CHAPTERS.slice(1);
   const samples = transitions
@@ -45,12 +69,13 @@ try {
             (offset, index) => [`into-${chapter.id}-${index}`, chapter.start + offset] as const,
           ),
         ),
-        ['final-hold', CUTS.close.end - 1 / 30] as const,
+        ['final-hold', CUTS.close.end - 1 / COMMAND_FPS] as const,
       ]
     : sceneSamples;
   for (const [name, seconds] of samples) {
     await renderStill({
       serveUrl,
+      puppeteerInstance: browser,
       composition,
       frame: frames(seconds),
       output: join(output, `${name}.png`),
@@ -64,6 +89,7 @@ try {
       await renderMedia({
         ...ENCODING,
         serveUrl,
+        puppeteerInstance: browser,
         composition,
         frameRange: [frames(chapter.start - 1.2), frames(chapter.start + 1.1) - 1],
         outputLocation: join(output, `into-${chapter.id}.mp4`),
@@ -73,5 +99,6 @@ try {
     }
   }
 } finally {
+  await browser.close({ silent: true });
   rmSync(serveUrl, { recursive: true, force: true });
 }

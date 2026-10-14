@@ -8,6 +8,10 @@ retain their original licenses, copyright, and trademark ownership.
 - React: MIT. Lucide: ISC. The package lockfile pins the actual dependency versions.
 - Inter and Noto Sans SC: SIL Open Font License, supplied by Fontsource. Copies of their
   notices are in `licenses/inter-OFL.txt` and `licenses/noto-sans-sc-OFL.txt`.
+- Sora: SIL Open Font License 1.1, copyright the Sora Project Authors. The Commands film
+  uses an unchanged variable-font snapshot from Google Fonts commit `a926665019d3f7f25c8b1212cecbfa871e70de82`.
+  The original notice is in `licenses/sora-OFL.txt`; immutable source URLs and SHA-256
+  hashes for the font and notice are in `assets/manifest.json`.
 - Provider/service marks: unchanged snapshots from Atd's brand assets. Original upstream
   sources, rendering instructions, and documented symbol extraction are preserved in
   `assets/brands/lndev/sources.json` and `assets/brands/external/sources.json`.

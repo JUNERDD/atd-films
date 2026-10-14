@@ -1,9 +1,6 @@
 # Command workflow film
 
-`AtdCommandsZh` is a **38-second, 1920 × 1080, 30 fps** Chinese film in
-`src/films/commands/`. It demonstrates three concrete workflows: improving a coding request inside a Codex-like
-composer before sending it to the coding agent, translating an unsent Mail draft, and inserting
-a meeting's action items after the original text in Notes. A short Commands settings shot establishes the saved commands and configured shortcuts.
+`AtdCommandsZh` is a **42-second, 1920 × 1080, 30 fps** Chinese feature film. It shows a saved instruction acting on selected text, then returning a useful result where the user is working.
 
 ```sh
 pnpm preview:commands
@@ -11,82 +8,59 @@ pnpm preview:commands --transitions
 pnpm render:commands
 ```
 
-The preview writes seventeen review frames to `out/command-review/`. With `--transitions`, it
-writes twenty-six boundary and final-hold frames plus five short transition clips to
-`out/command-transitions/`. The render command produces `out/atd-commands-zh.mp4`.
-All commands prepare their assets and the original synthesized score. The score
-and its music/effects stems are in `public/audio/`. No desktop app is opened, no screen is recorded,
-and no model is called. `timeline.ts` owns chapter lengths and operation timing.
+The full render is `out/atd-commands-zh.mp4`. The detailed preview writes 22 states to `out/command-review/`; transition mode writes 26 boundary/final frames and five short encoded clips to `out/command-transitions/`. The generic `pnpm preview commands-zh` samples eight representative moments. These commands prepare pinned assets and the original score. They do not open a product app, record a screen, or call a model.
 
-**Atd has no operation sounds.** The film adds restrained editorial sound design over its
-independent background music: a short opening breath, four soft right-to-left window sweeps,
-and a gentle brand close. `commandCues()` derives the sweeps from `CUTS` and `HANDOFF` so they
-follow the picture. The closing D/A glass dyad shares the score's harmony. These accents sit
-below the music; mouse clicks, typing, command execution, and completion remain silent.
-The effects reuse the film's existing synthesis and cue buses, with no recorded samples or new
-dependencies. For a completely silent delivery, remove the audio track without re-encoding
-the picture:
+## Editorial direction
+
+This revision draws on [Shotbase's official launch film](https://www.youtube.com/watch?v=MoWSwxZGk_0): the same working object connects action and result; a clean white stage makes UI details legible; short phrases follow the action; scale changes lead attention; the brand gets a quiet black close. The research verified the official publisher and sampled the actual movie. It did not establish the original film's precise curves, font, BPM, instrumentation, or voiceover.
+
+The reusable [cinematic-product-film skill](../../../.agents/skills/cinematic-product-film/SKILL.md) contains the [timestamped reference study](../../../.agents/skills/cinematic-product-film/references/shotbase-study.md) and production guidance. No Shotbase images, footage, music or artwork are used in this film.
+
+| Time    | Picture and visible proof                                                                                                                             |
+| ------- | ----------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 0–3 s   | A short promise and enlarged selection toolbar establish the trigger.                                                                                 |
+| 3–14 s  | A Chinese Mail draft is selected; a configured shortcut opens options; English is chosen; the translation replaces the text in the same unsent draft. |
+| 14–18 s | Saved Commands and shortcut configuration establish that a method is reusable.                                                                        |
+| 18–27 s | A custom coding-request command replaces a vague draft with a concise prompt and a concrete acceptance example. The draft stays unsent.               |
+| 27–38 s | Notes selection opens command options; the output changes to insertion after the selection; original notes stay above the added owner/deadline list.  |
+| 38–42 s | Atd / Command and the final promise settle on black and remain visible through the last frame.                                                        |
+
+The film replaces the former repeated desktop/zoom/slide structure with varied product details on white. The important outcomes get settled reading holds. Pointer, selection, native controls and camera share a coordinate space. `timeline.ts` owns narrative and operation events; the scene clocks account for transition handles. The score and preview samples consume this timeline.
+
+## Product facts and scenario choices
+
+These are **authored, deterministic scenarios**, not live recordings or latency benchmarks. All input and output are fictional and public. Transformation output appears as a replacement or insertion, not simulated model-token streaming.
+
+Behavior was checked against [Atd product commit `6b624619`](https://github.com/JUNERDD/Atd/tree/6b6246197634b3f660d44250e496991e7c5d8bcc), especially:
+
+- [`starter-copy.ts`](https://github.com/JUNERDD/Atd/blob/6b6246197634b3f660d44250e496991e7c5d8bcc/apps/agent-service/src/commands/starter-copy.ts) and [`starters.ts`](https://github.com/JUNERDD/Atd/blob/6b6246197634b3f660d44250e496991e7c5d8bcc/apps/agent-service/src/commands/starters.ts) for command names, choices and defaults.
+- [`command-output.ts`](https://github.com/JUNERDD/Atd/blob/6b6246197634b3f660d44250e496991e7c5d8bcc/packages/agent-contracts/src/command-output.ts) for destinations and review.
+- [`CommandHold.swift`](https://github.com/JUNERDD/Atd/blob/6b6246197634b3f660d44250e496991e7c5d8bcc/apps/macos/Sources/AICore/Island/CommandHold.swift) and [`native-commands.ts`](https://github.com/JUNERDD/Atd/blob/6b6246197634b3f660d44250e496991e7c5d8bcc/apps/desktop/src/native-host/native-commands.ts) for shortcut options and external-app targeting.
+
+**Translate** uses selection input, replaces the selection, has review disabled, and uses no tools. The sample chooses English. Keyboard shortcuts are configured examples, not product defaults. The Mail scene never sends a message.
+
+**Improve coding request** (`完善编程需求`) is a custom command with selection input, replacement output, no review and no tools. Its instruction is: “Rewrite the selected coding request as a concise actionable prompt. Preserve facts and numbers; make the desired outcome and acceptance example explicit. Ask to preserve the current interface and public API, and verify quantity changes. Return only the revised prompt.” The expected total ¥755 is arithmetic in the prompt, not an executed code fix. This cut shows no downstream coding-agent actions or tests.
+
+**Extract action items** (`提取待办事项`) groups by owner. Its starter output is the conversation; the film explicitly changes the per-run destination to `插入选区后`. That destination does not change the command's saved default. The result is inserted plain text; it does not create native Notes tasks, reminders, or assignments. Original notes remain visible.
+
+Selection/writeback depends on a compatible editable target and appropriate access. These scenarios demonstrate supported examples, not universal application compatibility. The source-grounded product kit is reused without runtime imports from the product repository. Film-only changes do not require an in-app product-skill update.
+
+## Original sound
+
+Atd operations are silent. `audio.ts` adds original editorial music and restrained boundary accents, with no mouse, typing, execution, or completion sounds. The 120 BPM arrangement uses chapter-specific harmony and a recurring motif: a light opening, Mail pulse, drumless settings bridge, renewed Code/Notes energy, quieter result holds, and a resolved close. This tempo is an original production choice, not a measurement of Shotbase's score.
+
+The master is `public/audio/command-film.wav`; separate music and effects stems are in `public/audio/stems/`. Shared synthesis, seeded randomness and mastering make the output deterministic. Shared mastering applies its final fade and limiter; pre-limiter stems are intended for further mixing, not a sample-exact sum of the final master.
+
+For a silent delivery without re-encoding the picture:
 
 ```sh
 ffmpeg -i out/atd-commands-zh.mp4 -map 0:v:0 -c:v copy -an -movflags +faststart out/atd-commands-zh-silent.mp4
 ```
 
-These are **authored scenario animations, not live recordings**. The toolbar, command island,
-options, and Commands settings reuse the source-grounded product kit. The Codex-like window,
-its browser preview, Mail, and Notes are scene recreations. The coding scene follows the project
-sidebar, task conversation, composer, and change-review model described in the
-[official Codex app overview](https://openai.com/index/introducing-the-codex-app/); it is not a
-pixel-identical recording of a particular Codex build. Inputs and answers are fictional, public examples; the preview
-store is illustrative. Timing does not represent model latency. The email remains a draft.
+## Reproducibility and assets
 
-The blue wallpaper and app icons are pinned snapshots in `public/command-film/`, verified
-by `pnpm assets:check`. The wallpaper was cropped from the product website's shared desktop
-to remove its menu bar and Dock; app icons were extracted once from the installed applications.
-See `assets/manifest.json` for source attribution, transformation, and SHA-256 checksums.
-Cloning and rendering this repository needs no product checkout, macOS, ChatGPT installation,
-`sips`, or separately installed `ffmpeg`. Apple and OpenAI retain their marks.
+Typography combines three free SIL Open Font License families by role: **Sora** gives the English editorial titles their distinct shape, **Inter** carries Latin interface text, and **Noto Sans SC** covers Chinese titles, interface text and punctuation. These are choices for this cut, not a one-font restriction on future films. The Sora variable font is an unchanged snapshot from [Google Fonts commit `a926665`](https://github.com/google/fonts/tree/a926665019d3f7f25c8b1212cecbfa871e70de82/ofl/sora), loaded locally before frames are captured. Its license and hash are checked in; no new dependency or system-font installation is needed.
 
-The coding command, “完善编程需求”, is a custom example: selection input, replacement output,
-no confirmation review, and no tools. Its instruction is: “Rewrite the selected coding request
-as a concise actionable prompt. Preserve its facts and numbers; make the intended result,
-constraints, and acceptance checks explicit. Keep the existing interface and public API, and
-ask for appropriate verification. Return only the revised prompt.” `content.ts` holds both
-versions. After the replacement is visible, the user sends it; the coding agent's illustrative
-inspection, edit, verification, and page update follow. The cart has two items at ¥328 and one
-at ¥99: the total changes from ¥427 to ¥755.
+Use the pinned Node and pnpm versions. `pnpm check` verifies source/configuration and asset hashes; inspect actual review frames, transition clips, the complete encode and its metadata before accepting a creative change. Other films and the shared kit are unchanged by this revision.
 
-The current cut is 38 seconds, down from the previous 44-second cut and the original 78 seconds.
-The two-second opener connects the promise to the actual composer and selection toolbar. The
-coding, email, and meeting workflows run for 13, 8.5, and 8.5 seconds; a three-second Commands
-settings shot follows the examples, then a three-second brand close.
-
-The previous cut held a wide view with persistent headlines, step pills, and interface copy
-competing for attention. `shots.ts` now frames the next meaningful change: the prompt and its
-replacement, the translation options and written-back draft, then the output destination and
-inserted action items. The film reuses the existing spring camera. The source UI and pointer
-share its coordinate space, while short editorial captions stay outside the filmed desktop.
-The coding result pulls back enough to retain both the conversation and corrected preview.
-
-Each result settles before its window leaves. The pointer and editorial caption withdraw on
-separate beats, and the camera returns to the same resting position with zero velocity before
-the next window arrives. `editing.ts` choreographs 0.4-second handles on each side of a chapter
-boundary: neighboring windows glide horizontally over one continuous wallpaper and desktop
-chrome, without stacking their text in a dissolve. The chapter-local operation clocks stay
-unchanged. The Commands window fades away before the brand close enters; the final card remains
-fully visible through the last frame. Caption changes also have a brief exit before the next
-line enters.
-
-Clicks and keystrokes have immediate
-pressed feedback; their menus or status changes follow 100–150 ms later. Pointer arrival, hover,
-click, processing, paste, and success use named events in the same timeline, rather than separate
-scene literals. Text selection follows the drag position; Mail uses an explicit ⌘A followed by
-visible shortcut and arrow-key actions. The background score follows the film length. These
-brief processing intervals are editorial timing, not a model-speed claim.
-
-Translate and Extract action items use the current starter-command names and parameter choices
-from `apps/agent-service/src/commands/starter-copy.ts`. Translate chooses English and replaces the
-selection. Extract action items groups by owner; its per-run output changes from the conversation
-to insertion after the selection. The inserted Notes content is plain text. The demo's shortcuts
-are user-configurable examples, not product defaults.
-
-The film changes no product behavior, so the in-app product skills need no update.
+The blue wallpaper and application icons are immutable snapshots under `public/command-film/`, with source attribution, transformations and hashes in `assets/manifest.json`. Apple and OpenAI retain their marks; fonts and other assets retain the notices in `THIRD_PARTY.md`. Rendering does not access installed applications or live product files. Generated audio, stills and movies are ignored and stay outside ordinary Git history.

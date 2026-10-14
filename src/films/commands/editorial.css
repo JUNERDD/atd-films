@@ -1,60 +1,31 @@
-.cf-film-hud {
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  opacity: var(--hud-o, 1);
-}
-.cf-editorial-caption {
-  position: absolute;
-  left: 0;
-  bottom: 0;
-  width: 870px;
-  padding: 65px 0 33px 72px;
-  background: radial-gradient(
-    ellipse at 0 100%,
-    rgb(8 15 31 / 0.94),
-    rgb(8 15 31 / 0.57) 44%,
-    transparent 73%
-  );
-  color: #fff;
-  pointer-events: none;
-}
-.cf-editorial-label {
-  font-size: 12px;
-  letter-spacing: 1.4px;
-  color: rgb(255 255 255 / 0.69);
-  margin-bottom: 12px;
-}
-.cf-editorial-stack {
-  display: grid;
-}
 .cf-editorial-copy {
-  grid-area: 1 / 1;
-  opacity: var(--caption-o);
-  transform: translateY(calc(var(--caption-y) * 1px));
+  position: absolute;
+  top: 73px;
+  left: 0;
+  right: 0;
+  text-align: center;
+  font-size: 54px;
+  line-height: 1.35;
+  font-weight: 480;
+  letter-spacing: -2px;
+  opacity: var(--copy-o);
+  transform: translateY(calc(var(--copy-y) * 1px));
 }
-.cf-editorial-mask {
-  overflow: hidden;
+.cf-editorial-copy strong {
+  font-weight: inherit;
+  color: var(--cf-blue);
 }
-.cf-editorial-mask strong {
-  display: block;
-  font-size: 33px;
-  line-height: 1.45;
-  font-weight: 560;
-  letter-spacing: -0.7px;
-  text-shadow: 0 2px 12px rgb(0 0 0 / 0.5);
+.cf-editorial-copy[data-scene='setup'] {
+  top: 71px;
+  font-size: 76px;
 }
-.cf-film-hud > .cf-key-hint[data-side] {
-  left: auto;
-  right: 64px;
+.cf-editorial-copy[data-scene='code'] {
+  top: 165px;
+  font-size: 66px;
+}
+.cf-editorial-copy[data-scene='notes'] {
+  top: auto;
   bottom: 40px;
-  background: rgb(15 20 33 / 0.87);
-}
-.cf-film-hud .cf-key-hint kbd {
-  width: 33px;
-  height: 30px;
-  font-size: 18px;
-}
-.cf-film-hud .cf-key-hint span {
-  font-size: 15px;
+  font-size: 34px;
+  letter-spacing: -1px;
 }

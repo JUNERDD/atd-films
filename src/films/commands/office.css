@@ -1,25 +1,32 @@
+.cf-mail-window {
+  opacity: var(--context-o, 1);
+}
 .cf-mail-window .mac-window[data-material],
 .cf-notes-window .mac-window[data-material] {
-  color: #262626;
+  --radius-window: 15px;
+  color: #292a2d;
   background: #fff;
-  --radius-window: 14px;
+  box-shadow:
+    0 1px 2px rgb(24 28 36 / 0.06),
+    0 17px 48px -12px rgb(24 28 36 / 0.12),
+    0 0 0 0.7px rgb(24 28 36 / 0.13);
 }
 .cf-mail-window .mac-window__bar {
-  background: #f3f2f1;
-  border-bottom: 1px solid #d9d9d9;
+  background: #f3f3f4;
+  border-bottom: 1px solid #e0e1e3;
 }
 .cf-mail-window .mac-window__title {
-  font-size: 13px;
-  font-weight: 550;
+  font-size: 14px;
+  font-weight: 540;
   position: absolute;
   left: 50%;
   transform: translateX(-50%);
 }
 .cf-mail-toolbar {
   display: flex;
-  gap: 23px;
+  gap: 21px;
   align-items: center;
-  color: #555;
+  color: #64666b;
 }
 .cf-mail-toolbar svg {
   width: 18px;
@@ -27,74 +34,74 @@
 }
 .cf-mail-toolbar svg:last-child {
   width: 12px;
-  margin-left: -13px;
+  margin-left: -11px;
 }
 .cf-mail-toolbar > span {
   width: 1px;
-  height: 22px;
-  background: #d2d2d2;
+  height: 21px;
+  background: #d7d8db;
 }
 .cf-mail-headers {
-  padding: 6px 28px;
+  padding: 10px 32px 0;
 }
 .cf-mail-headers > div {
   display: flex;
   align-items: center;
-  height: 38px;
+  height: 41px;
   gap: 8px;
-  border-bottom: 1px solid #e8e8e8;
-  font-size: 13px;
+  border-bottom: 1px solid #ececef;
+  font-size: 14px;
 }
 .cf-mail-headers > div > span {
-  color: #929292;
-  width: 71px;
+  color: #92969d;
+  width: 74px;
   text-align: right;
   margin-right: 7px;
 }
 .cf-mail-headers b {
-  font-size: 12px;
-  font-weight: 450;
-  padding: 3px 9px;
-  background: #e9eff6;
+  font-size: 13px;
+  font-weight: 460;
+  padding: 3px 10px;
+  background: #e9eff8;
   border-radius: 15px;
 }
 .cf-mail-headers small {
-  color: #8d8d8d;
-  font-size: 11px;
+  color: #94969c;
+  font-size: 12px;
 }
 .cf-mail-headers strong {
   font-weight: 450;
 }
 .cf-mail-body {
-  padding: 15px 104px 22px;
-  font-size: 18px;
-  line-height: 1.7;
+  padding: 36px 97px;
+  font-size: 24px;
+  line-height: 37px;
   letter-spacing: 0;
 }
 .cf-mail-body p {
-  margin: 16px 0;
-  white-space: pre-line;
+  margin: 0 0 16px;
+  white-space: nowrap;
 }
 .cf-mail-body p > span {
-  padding: 2px 0;
+  padding: 3px 0;
   box-decoration-break: clone;
   -webkit-box-decoration-break: clone;
 }
 .cf-mail-body p[data-selected] > span {
-  background: #b6d5ff;
+  background: var(--cf-selection);
 }
 .cf-draft-status {
   position: absolute;
-  right: 21px;
-  bottom: 15px;
-  font-size: 10px;
-  color: #969696;
+  right: 25px;
+  bottom: 19px;
+  font-size: 15px;
+  color: #9699a0;
 }
 .cf-notes-window .mac-window[data-material] {
   background: #fffefb;
 }
 .cf-notes-window .mac-window__sidebar {
-  background: #f0eeeb;
+  background: #f1f0ed;
   box-shadow: none;
 }
 .cf-notes-window .mac-window__bar {
@@ -103,8 +110,8 @@
 .cf-notes-toolbar {
   display: flex;
   align-items: center;
-  gap: 34px;
-  color: #817a68;
+  gap: 29px;
+  color: #88806b;
 }
 .cf-notes-toolbar svg {
   width: 18px;
@@ -115,23 +122,23 @@
   font-weight: 450;
 }
 .cf-notes-sidebar {
-  padding: 9px 10px;
-  font-size: 12px;
+  padding: 14px 10px;
+  font-size: 13px;
 }
 .cf-notes-sidebar h4 {
   padding: 0 9px;
-  margin: 5px 0 8px;
-  color: #787571;
-  font-weight: 600;
-  font-size: 11px;
+  margin: 5px 0 10px;
+  color: #908d84;
+  font-weight: 560;
+  font-size: 12px;
 }
 .cf-notes-sidebar > div:not(.cf-note-preview) {
   display: flex;
   align-items: center;
-  height: 32px;
-  gap: 8px;
+  height: 34px;
+  gap: 9px;
   padding: 0 8px;
-  border-radius: 7px;
+  border-radius: 8px;
 }
 .cf-notes-sidebar svg {
   height: 15px;
@@ -142,16 +149,16 @@
   color: #96928b;
 }
 .cf-notes-sidebar [data-current] {
-  background: #dedbd4;
+  background: #e1ded7;
 }
 .cf-note-preview {
   display: flex;
   flex-direction: column;
   gap: 8px;
-  margin-top: 28px;
+  margin-top: 24px;
   padding: 14px 10px;
   border-radius: 8px;
-  background: #f9dd8f;
+  background: #f8dfa0;
 }
 .cf-note-preview b {
   font-size: 12px;
@@ -159,56 +166,74 @@
 .cf-notes-sidebar .cf-note-preview > span {
   margin: 0;
   font-size: 10px;
-  color: #766b49;
+  color: #8c7d58;
 }
 .cf-note-paper {
-  padding: 4px 69px 32px;
+  position: absolute;
+  inset: 0;
 }
 .cf-note-date {
+  position: absolute;
+  top: 18px;
+  left: 0;
+  right: 0;
   text-align: center;
-  color: #aaa69b;
-  font-size: 10px;
-  padding-bottom: 20px;
+  color: #b0ac9e;
+  font-size: 11px;
+  line-height: 13px;
 }
 .cf-note-paper h2 {
-  font-size: 28px;
-  font-weight: 650;
-  margin: 0 0 8px;
+  position: absolute;
+  left: 48px;
+  top: 55px;
+  font-size: 30px;
+  line-height: 40px;
+  font-weight: 630;
+  margin: 0;
   letter-spacing: -0.7px;
 }
 .cf-note-paper > small {
-  font-size: 11px;
-  color: #a4a094;
+  position: absolute;
+  left: 48px;
+  top: 103px;
+  font-size: 13px;
+  line-height: 20px;
+  color: #a5a092;
 }
 .cf-note-original {
-  margin-top: 25px;
-  font-size: 15px;
-  line-height: 1.8;
+  position: absolute;
+  left: 48px;
+  top: 155px;
+  font-size: 23px;
+  line-height: 42px;
 }
 .cf-note-original p {
-  margin: 8px 0;
+  margin: 0;
+  white-space: nowrap;
 }
 .cf-note-original span {
   padding: 3px 0;
-  box-decoration-break: clone;
-  -webkit-box-decoration-break: clone;
-}
-.cf-note-original span {
-  background-image: linear-gradient(#b8d7fb, #b8d7fb);
+  background-image: linear-gradient(var(--cf-selection), var(--cf-selection));
   background-size: calc(var(--selection) * 100%) 100%;
   background-repeat: no-repeat;
 }
 .cf-note-actions {
-  margin-top: 24px;
-  padding-top: 18px;
+  position: absolute;
+  left: 48px;
+  right: 48px;
+  top: 309px;
+  padding-top: 21px;
+  border-top: 1px solid #ece9e0;
 }
 .cf-note-actions h3 {
-  margin: 0 0 12px;
-  font-size: 15px;
-  font-weight: 450;
+  margin: 0 0 11px;
+  font-size: 20px;
+  line-height: 28px;
+  font-weight: 620;
 }
 .cf-note-actions p {
-  margin: 9px 0;
-  font-size: 15px;
-  line-height: 1.8;
+  margin: 0;
+  font-size: 22px;
+  line-height: 40px;
+  white-space: nowrap;
 }

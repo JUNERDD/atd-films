@@ -1,12 +1,10 @@
-import { Braces, CheckCheck, Languages, Plus, Sparkles } from 'lucide-react';
+import { Braces, CheckCheck, Languages, Plus } from 'lucide-react';
 import { SettingsWindow } from '../../shared/product/settings/SettingsWindow.tsx';
 import { CommandRow, type CommandRowData } from '../../shared/product/settings/CommandRow.tsx';
 import { PrimaryButton } from '../../shared/product/settings/controls.tsx';
-import { Cursor } from '../../shared/world/Cursor.tsx';
-import { cursorAt } from '../../shared/world/cursor.ts';
 import { MacDesktop } from './MacDesktop.tsx';
 import { EditorialCaption } from './EditorialCaption.tsx';
-import { pointerPresence, useChapterTime } from './editing.ts';
+import { useChapterTime } from './editing.ts';
 import './setup.css';
 
 const COMMANDS: CommandRowData[] = [
@@ -31,51 +29,31 @@ const COMMANDS: CommandRowData[] = [
     keys: [],
     enabled: true,
   },
-  {
-    name: '润色文字',
-    description: '让选中的文字更清晰、更自然。',
-    icon: Sparkles,
-    keys: [],
-    enabled: true,
-  },
 ];
-
+/** A saved configuration, shown as the existing settings kit rather than an invented editor. */
 export function SetupScene() {
   const t = useChapterTime('setup');
   return (
     <MacDesktop t={t} scene="setup" overlay={<EditorialCaption scene="setup" t={t} />}>
-      <SettingsWindow
-        lang="zh"
-        box={{ x: 294, y: 175, width: 1012, height: 545 }}
-        section="commands"
-      >
-        <div className="cf-command-page">
-          <div className="cf-command-page-title">
-            <div>
+      <div className="cf-settings-crop">
+        <SettingsWindow
+          lang="zh"
+          box={{ x: 250, y: 237, width: 1100, height: 459 }}
+          section="commands"
+        >
+          <div className="cf-command-page">
+            <div className="cf-command-page-title">
               <h2>命令</h2>
-              <p>保存常用的提示词，随时运行。</p>
+              <PrimaryButton icon={Plus} label="新建命令" />
             </div>
-            <PrimaryButton icon={Plus} label="新建命令" />
+            <div className="cf-command-rows">
+              {COMMANDS.map((command) => (
+                <CommandRow key={command.name} command={command} emptyShortcut="设置快捷键" />
+              ))}
+            </div>
           </div>
-          <div className="cf-command-rows">
-            {COMMANDS.map((command, i) => (
-              <CommandRow
-                key={command.name}
-                command={command}
-                emptyShortcut="设置快捷键"
-                hover={i === 0 && t >= 0.85 && t < 1.7}
-              />
-            ))}
-          </div>
-        </div>
-      </SettingsWindow>
-      <Cursor
-        opacity={pointerPresence(t, 1.5)}
-        state={cursorAt(t, [
-          { at: 0, x: 1288, y: 689 },
-          { at: 0.85, x: 972, y: 374, travel: 0.4 },
-        ])}
-      />
+        </SettingsWindow>
+      </div>
     </MacDesktop>
   );
 }

@@ -1,46 +1,47 @@
-/** Authored, publishable examples. They illustrate supported commands; they are not model runs. */
+/** Public fictional inputs. Results are authored to prove the command, never a live model run. */
 export const PROMPT_BEFORE = [
   '购物车算错了：¥328 的键盘买 2 个，',
-  '再加 ¥99 桌垫，页面却显示 ¥427。帮我修好。',
+  '加 ¥99 桌垫，却显示 ¥427。帮我修好。',
 ];
-
 export const PROMPT_AFTER = [
-  '修复购物车总价计算：单价 × 数量，金额按分累加。',
+  '修复购物车总价计算。',
   '验收：¥328 × 2 + ¥99 = ¥755。',
-  '保持现有界面与接口；补充数量与小数金额测试，',
-  '完成后检查页面预览。',
+  '保持现有界面与接口；验证数量变化。',
 ];
-
 export const MAIL_BEFORE = [
   'Hi Alex，',
-  'Atlas 的新版原型已经准备好了。我们调整了注册流程，也补齐了移动端的空状态。',
-  '方便在周四下午 3 点前把反馈发给我们吗？这样我们就能在周五的评审前完成最后一轮修改。',
-  '谢谢！\nLin',
+  '新版原型已就绪。',
+  '请在周四 15:00 前给我反馈。',
+  '谢谢！Lin',
 ];
-
 export const MAIL_AFTER = [
   'Hi Alex,',
-  'The updated Atlas prototype is ready. We’ve refined the sign-up flow and added the missing empty states on mobile.',
-  'Could you share your feedback by 3 p.m. on Thursday? That would give us time to make the final updates before Friday’s review.',
-  'Thanks!\nLin',
+  'The updated prototype is ready.',
+  'Please send feedback by Thursday, 3 p.m.',
+  'Thanks! Lin',
 ];
-
 export const NOTES_BEFORE = [
   'Atlas 上线讨论',
-  '10 月 13 日 · 产品 / 设计 / 开发',
-  '今天确认：首版只保留邮箱注册，第三方登录放到下一期。',
-  '陈雨周四前补齐移动端空状态，并同步给前端。',
-  '林然周五前修好注册邮件里的链接，再跑一次完整流程。',
-  '周宁下周一发出内测邀请，首批 20 人。',
+  '10 月 14 日 · 项目会议',
+  '陈雨周四前补齐移动端空状态。',
+  '林然周五前修好注册邮件链接。',
+  '周宁下周一邀请首批 20 人内测。',
 ];
-
 export const NOTES_AFTER = [
   '待办事项 · 按负责人',
-  '陈雨 · 周四前：补齐移动端空状态，同步前端。',
-  '林然 · 周五前：修复注册邮件链接，验证完整流程。',
-  '周宁 · 下周一：向首批 20 人发送内测邀请。',
+  '陈雨 · 周四：补齐移动端空状态。',
+  '林然 · 周五：修复注册邮件链接。',
+  '周宁 · 下周一：邀请 20 人内测。',
 ];
-
+/** Include editorial copy as well as data: Noto Sans SC loads only requested glyph subsets. */
+export const EDITORIAL_TEXT = [
+  '常用的提示词。选中，就能用。',
+  '中文写下。英文写回。',
+  '好方法，存下来。下一次，直接用。',
+  '保留原文。接上下一步。',
+  '好方法，随手可用。',
+  '情景演示示例内容节奏经过编排快捷键为自定义示例',
+];
 export const FILM_TEXT = [
   ...PROMPT_BEFORE,
   ...PROMPT_AFTER,
@@ -48,6 +49,6 @@ export const FILM_TEXT = [
   ...MAIL_AFTER,
   ...NOTES_BEFORE,
   ...NOTES_AFTER,
-  '先把需求说清楚约束验收一起补齐再交给编程助手把想法推到下一步中文起草按住选英语英文直接写回开完会下一步是什么保留原文把待办接在后面三项谁做何时做好方法随处可用选中就能用让常用提示词回到工作现场当前输入框语言选择行动清单原位',
-  '重复的事交给把你的好方法存成命令选中调用回到工作编码写作整理完善修复代码购物袋商品数量合计验证正确参数快捷键输入来源输出位置结果写回当前软件目标语言英语翻译备忘录草稿会议待办情景演示示例内容与结果节奏经过编排专业中文收件人主题发送保存已有功能先把需求说清楚再让助手动手编程补齐约束验收条件一步写回输入框检查计算实现修改金额已修复文件测试通过查看更改最近任务项目自动化技能新建继续描述本地思考中处理中预览',
+  ...EDITORIAL_TEXT,
+  '输入来源输出位置结果写回目标语言英语翻译草稿会议待办参数快捷键当前软件收件人主题保存完善编程需求命令补齐约束与验收条件直接写回提示词输入框翻译选中的文本并保留原有格式把笔记整理成下一步行动清单设置快捷键新建命令选择原位改写编码写作整理编排已有功能专业中文原型评审选中正文按住打开选项选择英语确认英语运行翻译运行负责人插入选区后显示在对话中选区末尾',
 ].join('');

@@ -5,6 +5,7 @@ import { outputChoice } from '../../shared/product/run-output.ts';
 import { MacWindow } from '../../shared/world/MacWindow.tsx';
 import { Cursor } from '../../shared/world/Cursor.tsx';
 import { cursorAt, type CursorKey } from '../../shared/world/cursor.ts';
+import { smoothstep } from '../../shared/motion/ease.ts';
 import { MAIL_AFTER, MAIL_BEFORE } from './content.ts';
 import { KeyHint, MacDesktop } from './MacDesktop.tsx';
 import { EditorialCaption } from './EditorialCaption.tsx';
@@ -21,7 +22,6 @@ const sheet = (language: string): OptionsCardSpec => ({
   values: ['目标语言', output.label],
   details: [language, output.values[output.current] ?? ''],
 });
-
 const MOMENTS: IslandMoment[] = [
   { at: B.press, content: { kind: 'press', command: '翻译' } },
   { at: B.options, content: { kind: 'card', card: sheet('简体中文') } },
@@ -44,12 +44,11 @@ const MOMENTS: IslandMoment[] = [
   { at: B.write, content: { kind: 'writing' } },
   { at: B.done, content: { kind: 'done' } },
 ];
-
 const POINTER: CursorKey[] = [
-  { at: 0, x: 1195, y: 683 },
-  { at: B.focus - 0.12, x: 353, y: 348, travel: 0.3 },
-  { at: B.focus, x: 353, y: 348, press: true },
-  { at: B.select + 0.5, x: 1210, y: 714, travel: 0.3 },
+  { at: 0, x: 1120, y: 684 },
+  { at: B.focus - 0.12, x: 469, y: 378, travel: 0.3 },
+  { at: B.focus, x: 469, y: 378, press: true },
+  { at: B.select + 0.2, x: 1170, y: 698, travel: 0.25 },
 ];
 
 function KeyboardActions({ t }: { t: number }) {
@@ -60,20 +59,22 @@ function KeyboardActions({ t }: { t: number }) {
       : t < B.options
         ? { keys: ['⌃', '⌥', 'T'], label: '按住，打开选项', at: B.press }
         : t < B.language + 0.2
-          ? { keys: ['→'], label: '打开目标语言', at: B.languageKey }
+          ? { keys: ['→'], label: '目标语言', at: B.languageKey }
           : t < B.pickKey - 0.15
-            ? { keys: ['↓'], label: '选择英语', at: B.moveKey }
+            ? { keys: ['↓'], label: '英语', at: B.moveKey }
             : t < B.runKey - 0.15
               ? { keys: ['↩'], label: '确认英语', at: B.pickKey }
               : { keys: ['↩'], label: '运行翻译', at: B.runKey };
   const held = action.at === B.press ? t < B.options : t < action.at + 0.18;
-  return <KeyHint side keys={action.keys} label={action.label} pressed={t >= action.at && held} />;
+  return <KeyHint keys={action.keys} label={action.label} pressed={t >= action.at && held} />;
 }
 
 export function MailScene() {
   const t = useChapterTime('mail');
   const written = t >= B.written;
   const text = written ? MAIL_AFTER : MAIL_BEFORE;
+  const optionsFocus =
+    smoothstep(B.press - 0.2, B.options, t) * (1 - smoothstep(B.run, B.run + 0.42, t));
   return (
     <MacDesktop
       t={t}
@@ -85,9 +86,9 @@ export function MailScene() {
         </>
       }
     >
-      <div className="cf-mail-window">
+      <div className="cf-mail-window" style={{ '--context-o': 1 - optionsFocus * 0.86 }}>
         <MacWindow
-          box={{ x: 249, y: 164, width: 1102, height: 580 }}
+          box={{ x: 340, y: 170, width: 920, height: 570 }}
           title="Atlas · 原型评审"
           toolbar={
             <div className="cf-mail-toolbar">
@@ -124,10 +125,10 @@ export function MailScene() {
         lang="zh"
         t={t}
         moments={MOMENTS}
-        anchor={{ x: 800, y: 797 }}
+        anchor={{ x: 800, y: 750 }}
         exit={B.dismiss}
       />
-      <Cursor state={cursorAt(t, POINTER)} size={1.1} opacity={pointerPresence(t, B.run + 0.5)} />
+      <Cursor state={cursorAt(t, POINTER)} size={1.2} opacity={pointerPresence(t, B.press - 0.1)} />
     </MacDesktop>
   );
 }
